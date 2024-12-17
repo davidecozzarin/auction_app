@@ -1,0 +1,22 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Cozzarin Davide - Programmazione Web project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidecozzarin/auction_app.git"
+  },
+  "author": "Davide Cozzarin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidecozzarin/auction_app/issues"
+  },
+  "homepage": "https://github.com/davidecozzarin/auction_app#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
