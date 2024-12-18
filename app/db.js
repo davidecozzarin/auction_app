@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const MONGODB_URI = "mongodb://mongo:27017";
+const MONGODB_URI = "mongodb://cozzarin_mongo:27017";
 const DB_NAME = "auctiondb";
 let cachedDb;
 

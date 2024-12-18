@@ -1,21 +1,24 @@
 version: "3"
 
 services:
-  app:
-    container_name: app
+  cozzarin_app:
+    container_name: cozzarin_davide_app
     build: .
     command: nodemon --watch /usr/src/app -e js app.js
     ports:
       - "3000:3000"
     volumes:
-      - ./app:/usr/src/app
+      - ./app:/usr/src/app            # Monta tutto il codice sorgente
+      - /usr/src/app/node_modules     # Escludi node_modules dal montaggio
     links:
-      - "mongo:mongosrv"
+      - "cozzarin_mongo:mongosrv"
+    depends_on:
+      - cozzarin_mongo
 
-  mongo:
-    container_name: mongo
+  cozzarin_mongo:
+    container_name: cozzarin_davide_mongo
     image: mongo
     volumes:
       - ./data:/data/db
     ports:
-      - '27017:27017'
+      - "27017:27017"

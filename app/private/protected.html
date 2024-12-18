@@ -2,8 +2,16 @@
 <html>
     <head>
         <title>Pagina Protetta!</title>
+        <script>
+            async function logout() {
+                document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                alert("Logout effettuato!");
+                window.location.href = "/";
+            }
+        </script>
     </head>
     <body>
-        <h1>Pagina protetta da login!!</h1>
+        <h1>Benvenuto! Sei autenticato.</h1>
+        <button onclick="logout()">Logout</button>
     </body>
 </html>

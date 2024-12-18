@@ -2,26 +2,9 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const db = require("./db.js");
-//const verifyToken = require("./middleware/authMiddleware");
 const User = require("./models/User");
 const Auction = require("./models/Auction");
-
-const verifyToken = (req, res, next) => {
-    const token = req.cookies["token"];
-    if(!token){
-        res.status(403).json({"msg": "Autenticazione fallita"});
-        return;
-    }
-
-    try {
-        const decoded = jwt.verify(token, "my cats are better");
-        req.userId = decoded.id;
-        next();
-    } catch (error){
-        res.status(401).json({"msg": "Non autorizzato"});
-    }
-
-};
+const verifyToken = require("./middleware/authMiddleware"); 
 
 // GET /api/users/?q=query
 router.get("/api/users", async (req, res) => {
