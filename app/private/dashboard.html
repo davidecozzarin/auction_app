@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../public/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard Utente</h1>
+        <div id="auth-area">
+            <button id="logout-button">Logout</button>
+        </div>
+    </header>
+    <main>
+        <h2>Benvenuto!</h2>
+        <section>
+            <h3>Gestione delle aste</h3>
+            <button id="add-auction">Aggiungi Asta</button>
+            <div id="auctions-list">
+                <!-- Contenuto dinamico per le aste -->
+            </div>
+        </section>
+        <section>
+            <h3>Impostazioni utente</h3>
+            <button id="update-profile">Modifica Profilo</button>
+        </section>
+    </main>
+    <script>
+        // Logout Handler
+        document.getElementById("logout-button").addEventListener("click", () => {
+            document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            alert("Logout effettuato con successo!");
+            window.location.href = "../public/index.html";
+        });
+
+        // Controllo token per proteggere l'accesso
+        function checkAuthentication() {
+            const token = document.cookie
+                .split("; ")
+                .find(row => row.startsWith("token="))
+                ?.split("=")[1];
+
+            if (!token) {
+                alert("Accesso non autorizzato. Reindirizzamento al login...");
+                window.location.href = "../public/login.html";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", checkAuthentication);
+    </script>
+</body>
+</html>

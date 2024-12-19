@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Registrazione</title>
+</head>
+<body>
+    <h1>Signup</h1>
+    <form id="signup-form">
+        <label for="signup-username">Username:</label>
+        <input type="text" id="signup-username" required><br>
+
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" required><br>
+
+        <label for="signup-name">Name:</label>
+        <input type="text" id="signup-name" required><br>
+
+        <label for="signup-surname">Surname:</label>
+        <input type="text" id="signup-surname" required><br>
+
+        <label for="signup-bio">Bio:</label>
+        <input type="text" id="signup-bio" required><br>
+
+        <button type="submit">Signup</button>
+    </form>
+
+    <h1>Login</h1>
+    <form id="login-form">
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username" required><br>
+
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        // Signup Form Handler
+        document.getElementById("signup-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const response = await fetch("/api/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: document.getElementById("signup-username").value,
+                    password: document.getElementById("signup-password").value,
+                    name: document.getElementById("signup-name").value,
+                    surname: document.getElementById("signup-surname").value,
+                    bio: document.getElementById("signup-bio").value
+                })
+            });
+            const data = await response.json();
+            alert(data.msg);
+        });
+
+        // Login Form Handler
+        document.getElementById("login-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const response = await fetch("/api/auth/signin", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: document.getElementById("login-username").value,
+                    password: document.getElementById("login-password").value
+                })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert("Login riuscito!");
+                document.cookie = `token=${data.token}; path=/`; // Salva il token nei cookie
+                window.location.href = "/private/protected.html"; // Reindirizza alla pagina protetta
+            } else {
+                alert(data.msg);
+            }
+        });
+    </script>
+</body>
+</html>

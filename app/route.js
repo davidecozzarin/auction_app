@@ -20,16 +20,30 @@ router.get("/api/users/:id", async (req, res) => {
   res.json(user);
 });
 
-// GET /api/auctions?q=query
+// GET /api/auctions?q=query&category=category
 router.get("/api/auctions", async (req, res) => {
-  const query = req.query.q || "";
-  const auctions = await Auction.find({ title: { $regex: query, $options: "i" } });
-  res.json(auctions);
+  try {
+    const { q, category } = req.query; // Aggiunge il supporto per la query category
+    const query = q || "";
+    
+    // Filtra per titolo e categoria
+    const filter = { title: { $regex: query, $options: "i" } };
+    if (category) {
+      filter.category = category;
+    }
+
+    const auctions = await Auction.find(filter);
+    res.json(auctions);
+  } catch (error) {
+    console.error("Error fetching auctions:", error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
 });
+
 
 // POST /api/auctions
 router.post("/api/auctions", verifyToken, async (req, res) => {
-  const { title, description, startPrice, endDate } = req.body;
+  const { title, description, startPrice, endDate, category } = req.body;
   const newAuction = new Auction({
     title,
     description,
@@ -37,6 +51,7 @@ router.post("/api/auctions", verifyToken, async (req, res) => {
     currentBid: startPrice,
     endDate,
     createdBy: req.userId,
+    category,
   });
   await newAuction.save();
   res.status(201).json(newAuction);

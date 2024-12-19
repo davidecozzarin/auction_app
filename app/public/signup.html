@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Signup</h1>
+    <!-- Banner per messaggi -->
+    <div id="message-banner" style="display: none; padding: 10px; margin-bottom: 10px;"></div>
+
+    <form id="signup-form">
+        <label for="signup-username">Username:</label>
+        <input type="text" id="signup-username" required><br>
+
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" required><br>
+
+        <label for="signup-name">Name:</label>  
+        <input type="text" id="signup-name" required><br>
+
+        <label for="signup-surname">Surname:</label>
+        <input type="text" id="signup-surname" required><br>
+
+        <label for="signup-bio">Bio:</label>
+        <input type="text" id="signup-bio" required><br>
+
+        <button type="submit">Signup</button>
+    </form>
+
+    <script>
+        // Signup Form Handler
+        document.getElementById("signup-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = {
+                username: document.getElementById("signup-username").value.trim(),
+                password: document.getElementById("signup-password").value.trim(),
+                name: document.getElementById("signup-name").value.trim(),
+                surname: document.getElementById("signup-surname").value.trim(),
+                bio: document.getElementById("signup-bio").value,
+            };
+
+            try {
+                const response = await fetch("/api/auth/signup", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                const messageBanner = document.getElementById("message-banner");
+
+                if (response.ok) {
+                    messageBanner.style.display = "block";
+                    messageBanner.style.backgroundColor = "#d4edda"; // Verde per successo
+                    messageBanner.style.color = "#155724";
+                    messageBanner.innerText = "Signup successful! Redirecting to login...";
+
+                    setTimeout(() => {
+                        window.location.href = "/login.html"; // Reindirizza al login
+                    }, 2000);
+                } else {
+                    messageBanner.style.display = "block";
+                    messageBanner.style.backgroundColor = "#f8d7da"; // Rosso per errore
+                    messageBanner.style.color = "#721c24";
+                    messageBanner.innerText = data.msg || "Signup failed. Try again.";
+                }
+            } catch (error) {
+                console.error("Signup Error:", error);
+                alert("An error occurred while signing up.");
+            }
+        });
+    </script>
+</body>
+</html>
