@@ -32,23 +32,8 @@
         document.getElementById("logout-button").addEventListener("click", () => {
             document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
             alert("Logout effettuato con successo!");
-            window.location.href = "../public/index.html";
+            window.location.href = "/index.html";
         });
-
-        // Controllo token per proteggere l'accesso
-        function checkAuthentication() {
-            const token = document.cookie
-                .split("; ")
-                .find(row => row.startsWith("token="))
-                ?.split("=")[1];
-
-            if (!token) {
-                alert("Accesso non autorizzato. Reindirizzamento al login...");
-                window.location.href = "../public/login.html";
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", checkAuthentication);
     </script>
 </body>
 </html>
