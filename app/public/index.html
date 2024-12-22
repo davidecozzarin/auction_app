@@ -4,52 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aste Online</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <header>
+    <header class="main-header">
         <h1>Aste Online</h1>
-        <div id="auth-area">
-            <button id="auth-button">Login</button>
-        </div>
+        <input type="text" id="search-bar" placeholder="Cerca per marchio, modello, artista..." />
+        <button id="auth-button">Login</button>
     </header>
+    <nav class="category-nav">
+        <button class="category-icon">Tutte</button>
+        <button class="category-icon">Arte</button>
+        <button class="category-icon">Gioielli</button>
+        <button class="category-icon">Collezionismo</button>
+    </nav>
     <main>
-        <div>
-            <label for="filter-category">Categoria:</label>
-            <select id="filter-category">
-                <option value="">Tutte</option>
-                <option value="arte">Arte</option>
-                <option value="gioielli">Gioielli</option>
-                <option value="collezionismo">Collezionismo</option>
-            </select>
-        </div>
         <section id="auctions-list">
             <!-- Le aste saranno caricate qui -->
         </section>
     </main>
-    <script>
-        // Gestione del bottone Login/Logout
-        function updateAuthButton() {
-            const authButton = document.getElementById("auth-button");
-            const token = document.cookie
-                .split("; ")
-                .find(row => row.startsWith("token="))
-                ?.split("=")[1];
-
-            if (token) {
-                authButton.textContent = "Vai alla Dashboard";
-                authButton.onclick = () => {
-                    window.location.href = "private/dashboard.html";
-                };
-            } else {
-                authButton.textContent = "Login";
-                authButton.onclick = () => {
-                    window.location.href = "login.html";
-                };
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", updateAuthButton);
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

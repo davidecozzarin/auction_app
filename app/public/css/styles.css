@@ -1,0 +1,86 @@
+/* Header principale */
+.main-header {
+  display: grid;
+  grid-template-columns: 2fr 5fr 1fr;
+  align-items: center;
+  gap: 1rem;
+  background-color: #0078D7;
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-header h1 {
+  margin: 0;
+}
+
+#search-bar {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+}
+
+#auth-button {
+  justify-self: end;
+}
+
+/* Barra di navigazione delle categorie */
+.category-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+}
+
+.category-icon {
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #0078D7;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-icon:hover {
+  background-color: #005A9E;
+}
+
+.category-icon.active {
+  background-color: #005A9E;
+  color: #FFF;
+  font-weight: bold;
+  border: 2px solid #003E70;
+}
+
+#auctions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.auction {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auction h2 {
+  margin: 0;
+  color: #0078D7;
+}
+
+.auction p {
+  margin: 0.5rem 0;
+}
+

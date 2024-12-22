@@ -6,7 +6,7 @@ const auctionSchema = new mongoose.Schema({
   startPrice: { type: Number, required: true },
   currentBid: { type: Number, default: 0 },
   endDate: { type: Date, required: true },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, 
   category: { type: String, required: true },
   bids: [
     {

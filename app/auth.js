@@ -1,3 +1,5 @@
+/*
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -61,17 +63,19 @@ router.post("/signin", async (req, res) => {
       return res.status(401).json({ msg: "Invalid username or password" });
     }
 
-    // Genera un token JWT
-    const tokenData = { id: user.id };
-    const token = jwt.sign(tokenData, "my cats are better", { expiresIn: 86400 });
+     // Genera un nuovo token
+     const tokenData = { id: user.id };
+     const token = jwt.sign(tokenData, "my cats are better", { expiresIn: "1h" }); // Token valido per 1 ora
+     console.log("[/signin] Nuovo token generato:", token);
 
-    // Setta il cookie con il token (httpOnly per sicurezza)
-    res.cookie("token", token, { httpOnly: true });
-    res.status(200).json({ msg: "Successfully authenticated", token });
-  } catch (error) {
-    console.error("Signin Error:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
-  }
+     // Imposta il cookie
+     res.cookie("token", token, { httpOnly: true });
+     return res.status(200).json({ msg: "Successfully authenticated", token });
+ } catch (error) {
+     console.error("[/signin] Errore durante il login:", error.message);
+     res.status(500).json({ msg: "Internal Server Error" });
+ }
 });
 
 module.exports = router;
+*/
