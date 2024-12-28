@@ -6,40 +6,46 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
-    <header>
+<body id="dashboard-body">
+    <header class="main-header">
         <h1>Dashboard Utente</h1>
+        <input type="text" id="search-bar" placeholder="Cerca per marchio, modello, artista..." />
         <div id="auth-area">
-            <button id="logout-button">Logout</button>
+            <button id="logout-button" class="auth-button">Logout</button>
         </div>
     </header>
-    <main>
-        <section>
+    <main class="dashboard-main">
+        <section class="dashboard-section">
             <h2>Aggiungi Asta</h2>
-            <button id="add-auction-button">Mostra Form</button>
-            <form id="add-auction-form" style="display: none;">
-                <label for="auction-title">Titolo:</label>
-                <input type="text" id="auction-title" required>
-                <label for="auction-description">Descrizione:</label>
-                <input type="text" id="auction-description" required>
-                <label for="auction-start-price">Prezzo di partenza:</label>
-                <input type="number" id="auction-start-price" required>
-                <label for="filter-category">Categoria:</label>
+            <button id="add-auction-button" class="toggle-button">Mostra Form</button>
+            <form id="add-auction-form" class="auction-form" style="display: none;">
+                <input type="text" id="auction-title" placeholder="Titolo" required>
+                <input type="text" id="auction-description" placeholder="Descrizione" required>
+                <input type="number" id="auction-start-price" placeholder="Prezzo di partenza" required>
                 <select id="filter-category" required>
-                    <option value="">Seleziona</option>
+                    <option value="" disabled selected>Categoria</option>
                     <option value="Arte">Arte</option>
                     <option value="Gioielli">Gioielli</option>
                     <option value="Collezionismo">Collezionismo</option>
                 </select>
-                <label for="auction-end-date">Data di fine:</label>
-                <input type="date" id="auction-end-date" required>
-                <label for="auction-end-time">Ora di fine:</label>
-                <input type="time" id="auction-end-time" required>
-                <button type="submit">Crea Asta</button>
+                <input type="date" id="auction-end-date" placeholder="Data di fine" required>
+                <input type="time" id="auction-end-time" placeholder="Ora di fine" required>
+                <button type="submit" class="form-button">Crea Asta</button>
             </form>
         </section>
-        <section>
-            <h2>Le Tue Aste</h2>
+        <section class="dashboard-section">
+            <h2>Tutte le Aste</h2>
+            <section class="filter-section">
+                <button class="filter-button" data-filter="all">Tutte</button>
+                <button class="filter-button" data-filter="active">Attive</button>
+                <button class="filter-button" data-filter="expired">Scadute</button>
+            </section>
+            <nav class="category-nav">
+                <button class="category-icon">Tutte</button>
+                <button class="category-icon">Arte</button>
+                <button class="category-icon">Gioielli</button>
+                <button class="category-icon">Collezionismo</button>
+            </nav>
             <div id="auctions-list">
                 <!-- Aste create dall'utente -->
             </div>

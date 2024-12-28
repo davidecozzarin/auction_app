@@ -6,6 +6,8 @@ const User = require("./models/User");
 const Auction = require("./models/Auction");
 const verifyToken = require("./middleware/authMiddleware");
 const bcrypt = require("bcrypt");
+const { connectToDatabase, ObjectId } = require("./db.js");
+
 
 const SALT_ROUNDS = 10; // Numero di round per l'hashing (più alto, più sicuro ma lento)
 
@@ -103,7 +105,7 @@ router.get("/users/:id", async (req, res) => {
     const usersCollection = mongo.collection("users");
 
     // Cerca l'utente per ID
-    const user = await usersCollection.findOne({ _id: new db.ObjectId(req.params.id) });
+    const user = await usersCollection.findOne({ _id: new ObjectId(req.params.id) });
     if (!user) return res.status(404).json({ msg: "User not found" });
 
     res.json(user);
@@ -115,20 +117,50 @@ router.get("/users/:id", async (req, res) => {
 
 router.get("/auctions", async (req, res) => {
   try {
-    const { q = "", category } = req.query;
+    const { category = "" } = req.query;
 
-    // Connessione al database
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
+    const usersCollection = mongo.collection("users");
 
-    // Filtro per titolo e categoria
-    const filter = { title: { $regex: q, $options: "i" } };
+    const filter = {};
     if (category) {
       filter.category = category;
     }
 
     const auctions = await auctionsCollection.find(filter).toArray();
-    res.json(auctions);
+
+    const now = new Date();
+
+    // Enrich auctions with expiration status and winner name
+    const enrichedAuctions = await Promise.all(
+      auctions.map(async (auction) => {
+        const isExpired = new Date(auction.endDate) <= now;
+        let winner = null;
+        let winnerName = null;
+
+        if (isExpired && auction.bids?.length > 0) {
+          // Find the highest bid
+          const highestBid = auction.bids.reduce((highest, bid) =>
+            bid.amount > highest.amount ? bid : highest, auction.bids[0]
+          );
+          winner = highestBid.user;
+
+          // Find the username of the winner
+          const user = await usersCollection.findOne({ _id: new db.ObjectId(winner) });
+          winnerName = user ? user.username : "Sconosciuto";
+        }
+
+        return {
+          ...auction,
+          isExpired,
+          winner,
+          winnerName, // Add the winner's username
+        };
+      })
+    );
+
+    res.json(enrichedAuctions);
   } catch (error) {
     console.error("Error fetching auctions:", error);
     res.status(500).json({ msg: "Internal Server Error" });
@@ -175,7 +207,7 @@ router.get("/auctions/:id", async (req, res) => {
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
 
-    const auction = await auctionsCollection.findOne({ _id: new db.ObjectId(req.params.id) });
+    const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
     if (!auction) return res.status(404).json({ msg: "Auction not found" });
 
     res.json(auction);
@@ -194,7 +226,7 @@ router.put("/auctions/:id", verifyToken, async (req, res) => {
     const auctionsCollection = mongo.collection("auctions");
 
     const result = await auctionsCollection.findOneAndUpdate(
-      { _id: new db.ObjectId(req.params.id), createdBy: req.userId },
+      { _id: new ObjectId(req.params.id), createdBy: req.userId },
       { $set: { title, description } },
       { returnDocument: "after" }
     );
@@ -217,7 +249,7 @@ router.delete("/auctions/:id", verifyToken, async (req, res) => {
     const auctionsCollection = mongo.collection("auctions");
 
     const result = await auctionsCollection.deleteOne({
-      _id: new db.ObjectId(req.params.id),
+      _id: new ObjectId(req.params.id),
       createdBy: req.userId,
     });
 
@@ -238,7 +270,7 @@ router.get("/auctions/:id/bids", async (req, res) => {
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
 
-    const auction = await auctionsCollection.findOne({ _id: new db.ObjectId(req.params.id) });
+    const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
     if (!auction) return res.status(404).json({ msg: "Auction not found" });
 
     res.json(auction.bids || []);
@@ -256,7 +288,7 @@ router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
 
-    const auction = await auctionsCollection.findOne({ _id: new db.ObjectId(req.params.id) });
+    const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
     if (!auction) {
       return res.status(404).json({ msg: "Auction not found" });
     }
@@ -271,7 +303,7 @@ router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
 
     // Aggiungi l'offerta
     const updatedAuction = await auctionsCollection.findOneAndUpdate(
-      { _id: new db.ObjectId(req.params.id) },
+      { _id: new ObjectId(req.params.id) },
       {
         $push: { bids: { user: req.userId, amount, date: new Date() } },
         $set: { currentBid: amount },
@@ -294,7 +326,7 @@ router.get("/whoami", verifyToken, async (req, res) => {
     const usersCollection = mongo.collection("users");
 
     // Trova l'utente in base all'ID decodificato dal token
-    const user = await usersCollection.findOne({ _id: new db.ObjectId(req.userId) });
+    const user = await usersCollection.findOne({ _id: new ObjectId(req.userId) });
     if (!user) {
       return res.status(404).json({ msg: "User not found" });
     }

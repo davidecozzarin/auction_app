@@ -1,4 +1,23 @@
-/* Header principale */
+/* Stile globale */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#index-body {
+  margin-top: 10px; 
+  margin-right: 200px;  
+  margin-left: 200px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  height: 100vh; /* Per centrare il contenuto */
+}
+
 .main-header {
   display: grid;
   grid-template-columns: 2fr 5fr 1fr;
@@ -22,10 +41,6 @@
   width: 100%;
 }
 
-#auth-button {
-  justify-self: end;
-}
-
 /* Barra di navigazione delle categorie */
 .category-nav {
   display: grid;
@@ -35,37 +50,14 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
-}
-
-.category-icon {
-  padding: 1rem;
-  text-align: center;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #0078D7;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.category-icon:hover {
-  background-color: #005A9E;
-}
-
-.category-icon.active {
-  background-color: #005A9E;
-  color: #FFF;
-  font-weight: bold;
-  border: 2px solid #003E70;
+  margin-top: 10px;
 }
 
 #auctions-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
-  padding: 1rem;
+  margin-top: 10px;
 }
 
 .auction {
@@ -84,3 +76,183 @@
   margin: 0.5rem 0;
 }
 
+button {
+  font-size: 1rem; /* Dimensione testo */
+  font-weight: bold; /* Testo in grassetto */
+  padding: 0.5rem 1rem; /* Spaziatura interna */
+  border: none; /* Nessun bordo */
+  border-radius: 8px; /* Angoli arrotondati */
+  cursor: pointer; /* Cambia il cursore a mano */
+  transition: all 0.3s ease; /* Transizione fluida */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+/* Stile personalizzato per il pulsante di autenticazione */
+#auth-button {
+  justify-self: end;
+  background-color: #005A9E; /* Colore principale */
+  color: white; /* Testo bianco */
+}
+
+#auth-button:hover {
+  background-color: #0078D7; /* Colore al passaggio del mouse */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra più pronunciata */
+  transform: translateY(-2px); /* Solleva il pulsante */
+}
+
+#auth-button:active {
+  background-color: #003E70; /* Colore quando cliccato */
+  transform: translateY(1px); /* Pulsante abbassato */
+}
+
+/* Stile personalizzato per i pulsanti delle categorie */
+.category-icon {
+  background-color: #0078D7; /* Colore principale */
+  color: white; /* Testo bianco */
+  text-align: center;
+}
+
+.category-icon:hover {
+  background-color: #005A9E; /* Colore al passaggio del mouse */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra più pronunciata */
+  transform: translateY(-2px); /* Solleva il pulsante */
+}
+
+.category-icon:active {
+  background-color: #003E70; /* Colore quando cliccato */
+  transform: translateY(1px); /* Pulsante abbassato */
+}
+
+/* Stile per i pulsanti "Select" nella lista delle aste */
+.auction button {
+  background-color: #008C45; /* Colore verde per differenziare */
+  color: white; /* Testo bianco */
+  font-size: 0.9rem; /* Font leggermente più piccolo */
+  padding: 0.4rem 1rem; /* Margine interno ridotto */
+}
+
+.auction button:hover {
+  background-color: #006C34; /* Colore verde scuro al passaggio del mouse */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra più pronunciata */
+  transform: translateY(-2px); /* Solleva il pulsante */
+}
+
+.auction button:active {
+  background-color: #004D25; /* Colore quando cliccato */
+  transform: translateY(1px); /* Pulsante abbassato */
+}
+
+/* Body per la pagina di login */
+#login-body {
+  display: flex;
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center;    /* Centra verticalmente */
+  height: 100vh;          /* Altezza dell'intera viewport */
+  background-color: #f9f9f9; /* Colore di sfondo */
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Contenitore Login */
+.login-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Titolo */
+.login-title {
+  font-size: 2rem;
+  color: #0078D7;
+  margin-bottom: 2rem;
+}
+
+/* Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-form input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.login-form input:focus {
+  border-color: #0078D7;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 120, 215, 0.5);
+}
+
+/* Pulsante Login */
+.login-button {
+  background-color: #005A9E;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #0078D7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:active {
+  background-color: #003E70;
+}
+
+/* Pulsante Signup */
+#signup-button {
+  margin-top: 1rem;
+  background-color: transparent;
+  color: #0078D7;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+}
+
+#signup-button:hover {
+  color: #005A9E;
+}
+
+/* Banner per messaggi */
+#message-banner {
+  display: none;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#message-banner.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+#message-banner.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}

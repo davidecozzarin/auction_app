@@ -1,3 +1,8 @@
+// Reindirizzamento al login
+document.getElementById("signup-button").addEventListener("click", () => {
+    window.location.href = "login.html"; 
+})
+
 // Signup Form Handler
 document.getElementById("signup-form").addEventListener("submit", async (e) => {
     e.preventDefault();
