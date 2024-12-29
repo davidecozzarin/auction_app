@@ -151,11 +151,23 @@ router.get("/auctions", async (req, res) => {
           winnerName = user ? user.username : "Sconosciuto";
         }
 
+         // Attach bids with user details
+         const detailedBids = await Promise.all(
+          (auction.bids || []).map(async (bid) => {
+            const user = await usersCollection.findOne({ _id: new db.ObjectId(bid.user) });
+            return {
+              ...bid,
+              userName: user ? user.username : "Anonimo",
+            };
+          })
+        );
+
         return {
           ...auction,
           isExpired,
           winner,
-          winnerName, // Add the winner's username
+          winnerName,
+          bids: detailedBids,
         };
       })
     );
@@ -280,13 +292,13 @@ router.get("/auctions/:id/bids", async (req, res) => {
   }
 });
 
-// POST /api/auctions/:id/bids
 router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
   try {
     const { amount } = req.body;
 
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
+    const usersCollection = mongo.collection("users");
 
     const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
     if (!auction) {
@@ -301,11 +313,24 @@ router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
       return res.status(400).json({ msg: "Bid must be higher than the current bid" });
     }
 
-    // Aggiungi l'offerta
+    // Recupera i dati dell'utente autenticato
+    const user = await usersCollection.findOne({ _id: new ObjectId(req.userId) });
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    // Aggiungi l'offerta con i dettagli utente
+    const newBid = {
+      user: req.userId, // Salva l'ID dell'utente
+      userName: user.username, // Salva il nome dell'utente
+      amount,
+      date: new Date(),
+    };
+
     const updatedAuction = await auctionsCollection.findOneAndUpdate(
       { _id: new ObjectId(req.params.id) },
       {
-        $push: { bids: { user: req.userId, amount, date: new Date() } },
+        $push: { bids: newBid },
         $set: { currentBid: amount },
       },
       { returnDocument: "after" }
@@ -317,6 +342,8 @@ router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
     res.status(500).json({ msg: "Internal Server Error" });
   }
 });
+
+
 
 // GET /api/whoami
 router.get("/whoami", verifyToken, async (req, res) => {

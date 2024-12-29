@@ -165,7 +165,7 @@ body {
     margin: 1rem 0;
     text-align: center;
 }
-
+/*
 .filter-button {
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;
@@ -183,4 +183,97 @@ body {
 
 .filter-button:hover {
     background-color: #005A9E;
+}
+*/
+/* Stile per i pulsanti attivi */
+.category-icon.active,
+.filter-button.active {
+    background-color: #005A9E; /* Colore evidenziato */
+    color: white; /* Testo bianco */
+    font-weight: bold; /* Grassetto */
+    border: 2px solid #003E70; /* Bordo aggiuntivo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra */
+    transform: scale(1.05); /* Leggero ingrandimento */
+    transition: all 0.3s ease; /* Transizione fluida */
+}
+
+/* Stile per i pulsanti non attivi quando si passa il mouse */
+.category-icon:not(.active):hover,
+.filter-button:not(.active):hover {
+    background-color: #0078D7; /* Colore hover */
+    transform: translateY(-2px); /* Leggero sollevamento */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra */
+}
+
+.bids-section {
+    background-color: #f8f9fa; /* Grigio chiaro */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block; /* Per rendere il contenitore compatto */
+    width: auto; /* Adatta la larghezza al contenuto */
+}
+
+.bids-table {
+    width: 100%; /* Assicura che la tabella occupi l'intera larghezza del contenitore */
+    border-collapse: collapse;
+}
+
+.bids-table th,
+.bids-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+
+.bids-section h3 {
+    margin: 0 0 1rem;
+    color: #0078D7;
+}
+
+.bid {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.bid:last-child {
+    border-bottom: none;
+}
+
+.bid p {
+    margin: 0.3rem 0;
+}
+
+.view-bids-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.view-bids-button:hover {
+    background-color: #0056b3;
+}
+
+.close-bids-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.close-bids-button:hover {
+    background-color: #c9302c;
 }
