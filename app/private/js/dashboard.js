@@ -299,3 +299,7 @@ document.addEventListener("click", async (e) => {
 document.getElementById("user-area-button").addEventListener("click", () => {
     window.location.href = "user-area.html";
 });
+
+document.getElementById("user-list-button").addEventListener("click", () => {
+    window.location.href = "user-list.html";
+});
