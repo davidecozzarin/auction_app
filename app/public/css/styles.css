@@ -256,3 +256,10 @@ button {
   color: #155724;
   border: 1px solid #c3e6cb;
 }
+
+#user-auctions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 10px;
+}

@@ -295,3 +295,7 @@ document.addEventListener("click", async (e) => {
         await loadBids(auctionId); // Mostra o nasconde lo storico delle offerte
     }
 });
+
+document.getElementById("user-area-button").addEventListener("click", () => {
+    window.location.href = "user-area.html";
+});

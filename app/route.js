@@ -115,6 +115,34 @@ router.get("/users/:id", async (req, res) => {
   }
 });
 
+// PUT /api/users  Aggiorna le informazioni del profilo utente autenticato (questa funzionalità l'ho aggiunta io)
+router.put("/users", verifyToken, async (req, res) => {
+  try {
+    console.log("User ID from token:", req.userId); // Logga l'ID utente
+    const { name, surname, bio } = req.body;
+
+    // Connessione al database
+    const mongo = await db.connectToDatabase();
+    const usersCollection = mongo.collection("users");
+    
+    console.log("[PUT /users] Query: ", {
+      filter: { _id: req.userId },
+      update: { $set: { name, surname, bio } },
+    });
+
+    // Aggiorna il profilo dell'utente autenticato
+    const result = await usersCollection.updateOne(
+      { _id: new ObjectId(req.userId) }, // Filtra per l'ID dell'utente autenticato
+      { $set: { name, surname, bio } },  // Aggiorna i campi
+    );
+
+    res.status(200).json({msg: "User Profile updated succesfully"})
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
 router.get("/auctions", async (req, res) => {
   try {
     const { category = "" } = req.query;
@@ -233,21 +261,27 @@ router.get("/auctions/:id", async (req, res) => {
 router.put("/auctions/:id", verifyToken, async (req, res) => {
   try {
     const { title, description } = req.body;
+    const auctionId = req.params.id;
 
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
 
-    const result = await auctionsCollection.findOneAndUpdate(
-      { _id: new ObjectId(req.params.id), createdBy: req.userId },
-      { $set: { title, description } },
-      { returnDocument: "after" }
+    const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
+    console.log("Auction data:", auction);
+    console.log("CreatedBy type:", typeof auction.createdBy, "value:", auction.createdBy);
+
+    console.log("Tentativo di aggiornamento asta:", { auctionId, userId: req.userId });
+
+    const result = await auctionsCollection.updateOne(
+      { _id: new ObjectId(req.params.id), createdBy: new ObjectId(req.userId) },
+      { $set: { title, description } }
     );
-
-    if (!result.value) {
-      return res.status(403).json({ msg: "Not authorized to modify this auction or auction not found" });
+    
+    if (result.matchedCount === 0) {
+        return res.status(403).json({ msg: "Not authorized to modify this auction or auction not found" });
     }
+    res.status(200).json({ msg: "Auction updated successfully" });
 
-    res.json(result.value);
   } catch (error) {
     console.error("Error updating auction:", error);
     res.status(500).json({ msg: "Internal Server Error" });
@@ -342,8 +376,6 @@ router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
     res.status(500).json({ msg: "Internal Server Error" });
   }
 });
-
-
 
 // GET /api/whoami
 router.get("/whoami", verifyToken, async (req, res) => {

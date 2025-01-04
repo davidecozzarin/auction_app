@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Utente</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1>Area Utente</h1>
+        <button id="back-to-dashboard" class="auth-button">Torna alla Dashboard</button>
+    </header>
+    <main class="user-main">
+        <!-- Sezione Profilo Utente -->
+        <section id="profile-section">
+            <h2>Profilo Utente</h2>
+            <form id="update-profile-form">
+                <input type="text" id="user-name" placeholder="Nome" required>
+                <input type="text" id="user-surname" placeholder="Cognome" required>
+                <textarea id="user-bio" placeholder="Bio" required></textarea>
+                <button type="submit" class="form-button">Salva Profilo</button>
+            </form>
+        </section>
+
+        <!-- Sezione delle aste dell'utente -->
+        <section id="user-auctions-section">
+            <h2>Le mie aste</h2>
+            <div id="user-auctions-list">
+                <!-- Qui verranno caricate le aste personali -->
+            </div>
+        </section>
+        <div id="auction-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Modifica Asta</h2>
+                <form id="auction-modal-form">
+                    <label for="modal-auction-title">Titolo:</label>
+                    <input type="text" id="modal-auction-title" required>
+                    <label for="modal-auction-description">Descrizione:</label>
+                    <textarea id="modal-auction-description" required></textarea>
+                    <div class="modal-actions">
+                        <button type="submit" class="form-button">Salva Modifiche</button>
+                        <button type="button" id="close-auction-modal" class="form-button">Annulla</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="js/user-area.js"></script>
+</body>
+</html>
