@@ -14,7 +14,7 @@ const SALT_ROUNDS = 10; // Numero di round per l'hashing (più alto, più sicuro
 // POST /signup: Registrazione di un nuovo utente con hashing della password
 router.post("/auth/signup", async (req, res) => {
   try {
-    const { username, password, name, surname, bio } = req.body;
+    const { username, password, name, surname } = req.body;
 
     // Connessione al database
     const mongo = await db.connectToDatabase();
@@ -36,7 +36,7 @@ router.post("/auth/signup", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     // Crea il nuovo utente con password criptata
-    const newUser = { id, username, password: hashedPassword, name, surname, bio };
+    const newUser = { id, username, password: hashedPassword, name, surname };
     await mongo.collection("users").insertOne(newUser);
 
     res.status(201).json({ msg: "User successfully created" });
@@ -119,7 +119,7 @@ router.get("/users/:id", async (req, res) => {
 router.put("/users", verifyToken, async (req, res) => {
   try {
     console.log("User ID from token:", req.userId); // Logga l'ID utente
-    const { name, surname, bio } = req.body;
+    const { name, surname } = req.body;
 
     // Connessione al database
     const mongo = await db.connectToDatabase();
@@ -127,13 +127,13 @@ router.put("/users", verifyToken, async (req, res) => {
     
     console.log("[PUT /users] Query: ", {
       filter: { _id: req.userId },
-      update: { $set: { name, surname, bio } },
+      update: { $set: { name, surname } },
     });
 
     // Aggiorna il profilo dell'utente autenticato
     const result = await usersCollection.updateOne(
       { _id: new ObjectId(req.userId) }, // Filtra per l'ID dell'utente autenticato
-      { $set: { name, surname, bio } },  // Aggiorna i campi
+      { $set: { name, surname } },  // Aggiorna i campi
     );
 
     res.status(200).json({msg: "User Profile updated succesfully"})
@@ -343,7 +343,10 @@ router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
       return res.status(400).json({ msg: "Auction is closed" });
     }
 
-    if (amount <= auction.currentBid) {
+    const bidAmount = parseFloat(amount); 
+    const currentBid = parseFloat(auction.currentBid); 
+
+    if (isNaN(bidAmount) || bidAmount <= currentBid) {
       return res.status(400).json({ msg: "Bid must be higher than the current bid" });
     }
 
@@ -391,7 +394,7 @@ router.get("/whoami", verifyToken, async (req, res) => {
     }
 
     // Rispondi con i dati dell'utente
-    res.json({ id: user._id, username: user.username, name: user.name, surname: user.surname, bio: user.bio });
+    res.json({ id: user._id, username: user.username, name: user.name, surname: user.surname });
   } catch (error) {
     console.error("Error fetching user data:", error);
     res.status(500).json({ msg: "Internal Server Error" });

@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const name = document.getElementById("user-name").value.trim();
         const surname = document.getElementById("user-surname").value.trim();
-        const bio = document.getElementById("user-bio").value.trim();
 
         try {
             const response = await fetch("/api/users", {
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${document.cookie.split('token=')[1]}`
                 },
-                body: JSON.stringify({ name, surname, bio }),
+                body: JSON.stringify({ name, surname }),
             });
 
             if (response.ok) {
@@ -44,7 +43,6 @@ async function loadUserProfile() {
             const user = await response.json();
             document.getElementById("user-name").value = user.name || "";
             document.getElementById("user-surname").value = user.surname || "";
-            document.getElementById("user-bio").value = user.bio || "";
         } else {
             alert("Errore durante il caricamento del profilo.");
         }

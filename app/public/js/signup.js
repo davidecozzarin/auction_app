@@ -11,7 +11,6 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
         password: document.getElementById("signup-password").value.trim(),
         name: document.getElementById("signup-name").value.trim(),
         surname: document.getElementById("signup-surname").value.trim(),
-        bio: document.getElementById("signup-bio").value.trim(),
     };
 
     try {

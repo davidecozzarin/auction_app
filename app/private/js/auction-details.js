@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     } else {
                         const error = await bidResponse.json();
                         alert(`Errore: ${error.msg}`);
+                        location.reload();
                     }
                 } catch (err) {
                     console.error("Errore durante l'offerta:", err);
