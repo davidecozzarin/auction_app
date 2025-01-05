@@ -1,0 +1,408 @@
+/* Reset di base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stile globale */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding:20px;
+}
+
+.main-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0056b3; /* Azzurro scuro */
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 5px; /* Spazio sotto l'header */
+}
+
+.header-container {
+    display: grid; /* Abilita il layout grid */
+    grid-template-columns: 5fr 2fr; /* Due colonne) */
+    align-items: center; /* Allinea verticalmente gli elementi */
+    gap: 20px; /* Spaziatura tra le colonne */
+    max-width: 1200px; /* Larghezza massima */
+    margin: 0; /* Centra il contenitore */
+}
+
+.header-left {
+    display: flex; /* Layout in linea per logo e titolo */
+    align-items: center;
+    gap: 10px; /* Spaziatura tra logo e titolo */
+    justify-content: flex-start; /* Allinea gli elementi a sinistra */
+}
+
+.header-right {
+    display: flex; /* Layout in linea per i pulsanti */
+    justify-content: flex-end; /* Allinea gli elementi a sinistra */
+    gap: 10px; /* Spaziatura tra i pulsanti */
+}
+
+.app-logo {
+    width: 40px; /* Regola la larghezza del logo */
+    height: auto; /* Mantiene le proporzioni */
+}
+
+.header-container h1 {
+    font-size: 1.5rem; /* Riduci la dimensione del testo per adattarlo */
+    margin: 0; /* Rimuovi margini extra */
+    white-space: nowrap; /* Impedisce il ritorno a capo */
+    overflow: hidden; /* Nasconde il testo in eccesso */
+    text-overflow: ellipsis; /* Aggiunge "..." se il testo supera lo spazio disponibile */
+}
+
+
+
+/* Layout principale */
+.dashboard-main {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Stile per le sezioni */
+.dashboard-section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-section h2 {
+    color: #005A9E;
+    margin-bottom: 10px;
+}
+
+/* Stile filtri */
+
+/* Contenitore del filtro per stato e titolo */
+.search-header {
+    display: flex;
+    flex-direction: column; /* Disposizione verticale degli elementi */
+    align-items: center; /* Centra gli elementi orizzontalmente */
+    justify-content: center; /* Centra gli elementi verticalmente */
+    margin-bottom: 10px; /* Spazio tra la sezione e il resto del contenuto */
+    text-align: center; /* Centrare il testo per sicurezza */
+}
+
+/* Bottone del filtro stato */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    background-color: #0078D7;
+    color: white;
+}
+
+.filter-button:hover {
+    background-color: #0056b3;
+}
+
+.filter-button.active {
+    background-color: #ffaa00;
+    color: white;
+    font-weight: bold;
+}
+
+/* Titolo "Cerca tra le aste" */
+.search-title {
+    font-size: 1.8rem; /* Dimensione del font per dare risalto */
+    color: #0056b3; /* Colore del titolo */
+    margin-bottom: 15px; /* Spazio tra il titolo e i bottoni */
+}
+
+/* Contenitore del filtro per categoria */
+.filter-group {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Titolo del filtro per categoria */
+.filter-group h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #0056b3;
+    text-align: center;
+}
+
+/* Bottoni per categoria */
+.category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.category-icon {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.category-icon:hover {
+    background-color: #c7c7c7;
+}
+
+.category-icon.active {
+    background-color: #ffaa00; /* Arancione */
+    color: white;
+    font-weight: bold;
+}
+
+
+
+/* Pulsanti */
+/* Stile per i pulsanti */
+button {
+    display: inline-block;
+    padding: 8px 12px; /* Dimensioni più compatte */
+    font-size: 0.9rem; /* Leggermente più piccolo */
+    border: none;
+    border-radius: 5px; /* Bordo arrotondato */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transizione per hover */
+    background-color: #0078D7; /* Colore di sfondo primario */
+    color: white; /* Colore del testo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+    font-weight: 500; /* Testo leggermente in grassetto */
+}
+
+/* Effetto hover */
+button:hover {
+    background-color: #005A9E; /* Colore di sfondo più scuro al passaggio del mouse */
+    transform: translateY(-2px); /* Leggero sollevamento */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Aumenta l'ombra */
+}
+
+/* Pulsanti disattivati (se necessario) */
+button:disabled {
+    background-color: #cccccc; /* Grigio chiaro */
+    color: #666666; /* Testo grigio scuro */
+    cursor: not-allowed; /* Blocco interazione */
+    box-shadow: none;
+}
+/* Pulsanti nella header con sfumatura */
+.header-right button {
+    padding: 6px 12px; /* Dimensioni compatte */
+    font-size: 0.8rem; /* Testo più piccolo */
+    margin: 0 5px; /* Spaziatura tra i pulsanti */
+    border: none;
+    border-radius: 5px; /* Angoli arrotondati */
+    background: linear-gradient(to right, #ffffff, #dbeeff); /* Sfumatura chiara */
+    color: #005A9E; /* Testo in tema */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+    font-weight: 500;
+    transition: all 0.3s ease; /* Animazione per hover */
+}
+
+/* Effetto hover per i pulsanti nella header */
+.header-right button:hover {
+    background: linear-gradient(to right, #dbeeff, #b0d8ff); /* Sfumatura leggermente più scura */
+    color: #003E70; /* Testo più scuro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata */
+    transform: translateY(-2px); /* Leggero sollevamento */
+}
+
+/* Pulsanti attivi */
+.header-right button:active {
+    background: linear-gradient(to right, #b0d8ff, #91c7ff); /* Sfumatura ancora più scura */
+    transform: translateY(0); /* Rimuovi sollevamento */
+}
+
+
+
+/*modale*/
+/* Stile base per il popup */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+/* Nascondi il popup */
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+/* Contenuto del popup */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 90%;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Animazione di apertura */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Pulsante di chiusura */
+.close-button {
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    float: right;
+    margin-top: -10px;
+    margin-right: -10px;
+    border: none;
+    background: none;
+}
+
+/* Stile lista aste */
+/* Stile per i riquadri delle aste */
+#auctions-list {
+    display: flex;
+    flex-wrap: wrap; /* Permette il ritorno a capo degli elementi */
+    gap: 20px; /* Spaziatura tra i riquadri */
+    justify-content: flex-start; /* Allinea i riquadri a sinistra */
+    padding: 20px;
+}
+
+.auction {
+    background-color: #f9f9f9; /* Sfondo chiaro */
+    border: 1px solid #ddd; /* Bordo sottile */
+    border-radius: 8px; /* Angoli arrotondati */
+    width: 300px; /* Larghezza fissa */
+    height: 200px; /* Altezza fissa */
+    display: flex;
+    flex-direction: column; /* Disposizione verticale del contenuto */
+    justify-content: center; /* Centra verticalmente il contenuto */
+    align-items: center; /* Centra orizzontalmente il contenuto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombreggiatura */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animazioni */
+}
+
+.auction:hover {
+    transform: translateY(-5px); /* Effetto di sollevamento al passaggio del mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombreggiatura più forte */
+}
+
+.auction h3 {
+    font-size: 1.5rem;
+    color: #0056b3;
+    margin-bottom: 10px;
+}
+
+.auction p {
+    margin: 10px 0;
+    color: #333;
+}
+
+.auction .view-details {
+    background-color: #0078D7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.auction .view-details:hover {
+    background-color: #0056b3;
+}
+
+.time-remaining {
+    color: #0078D7;
+    font-weight: bold;
+}
+
+.expired-message {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+
+/* regole specifiche per user-area.html */
+/* Specifico per l'Area Utente */
+#user-auctions-list {
+    display: flex;
+    flex-wrap: wrap; /* Consente il ritorno a capo */
+    gap: 20px; /* Spaziatura tra i riquadri */
+    justify-content: flex-start; /* Allinea i riquadri a sinistra */
+    padding: 20px;
+}
+
+#update-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#update-profile-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#update-profile-form .form-button {
+    align-self: center; /* Centra il pulsante */
+    background-color: #0078D7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+#update-profile-form .form-button:hover {
+    background-color: #0056b3;
+}

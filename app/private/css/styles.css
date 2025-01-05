@@ -1,4 +1,98 @@
-/* Stili generali */
+/* Reset di base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stile globale */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding:20px;
+}
+
+/* Stile per l'header */
+header {
+    background-color: #005A9E;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.8rem;
+}
+
+header .auth-button {
+    background: #0078D7;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header .auth-button:hover {
+    background: #005A9E;
+}
+
+/* Layout principale */
+.dashboard-main {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 20px;
+}
+
+/* Stile per le sezioni */
+.dashboard-section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-section h2 {
+    color: #005A9E;
+    margin-bottom: 15px;
+}
+
+/* Pulsanti */
+button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #0078D7;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+/*
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -69,7 +163,6 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* Form di aggiunta asta */
 .auction-form {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -110,7 +203,6 @@ body {
     background-color: #0078D7;
 }
 
-/* Stile lista aste */
 #auctions-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -133,7 +225,6 @@ body {
     margin: 0.5rem 0;
 }
 
-/* Toggle Form Button */
 .toggle-button {
     background-color: #008C45;
     color: white;
@@ -165,57 +256,36 @@ body {
     margin: 1rem 0;
     text-align: center;
 }
-/*
-.filter-button {
-    padding: 0.5rem 1rem;
-    margin: 0 0.5rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #0078D7;
-    color: white;
-    transition: background-color 0.3s ease;
-}
 
-.filter-button.active {
-    background-color: #005A9E;
-}
-
-.filter-button:hover {
-    background-color: #005A9E;
-}
-*/
-/* Stile per i pulsanti attivi */
 .category-icon.active,
 .filter-button.active {
-    background-color: #005A9E; /* Colore evidenziato */
-    color: white; /* Testo bianco */
-    font-weight: bold; /* Grassetto */
-    border: 2px solid #003E70; /* Bordo aggiuntivo */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra */
-    transform: scale(1.05); /* Leggero ingrandimento */
-    transition: all 0.3s ease; /* Transizione fluida */
+    background-color: #005A9E; 
+    color: white; 
+    font-weight: bold; 
+    border: 2px solid #003E70; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
+    transform: scale(1.05); 
+    transition: all 0.3s ease; 
 }
 
-/* Stile per i pulsanti non attivi quando si passa il mouse */
 .category-icon:not(.active):hover,
 .filter-button:not(.active):hover {
-    background-color: #0078D7; /* Colore hover */
-    transform: translateY(-2px); /* Leggero sollevamento */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra */
+    background-color: #0078D7; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
 }
 
 .bids-section {
-    background-color: #f8f9fa; /* Grigio chiaro */
+    background-color: #f8f9fa; 
     padding: 10px;
     border-radius: 5px;
     margin-top: 10px;
-    display: inline-block; /* Per rendere il contenitore compatto */
-    width: auto; /* Adatta la larghezza al contenuto */
+    display: inline-block; 
+    width: auto; 
 }
 
 .bids-table {
-    width: 100%; /* Assicura che la tabella occupi l'intera larghezza del contenitore */
+    width: 100%; 
     border-collapse: collapse;
 }
 
@@ -278,13 +348,11 @@ body {
     background-color: #c9302c;
 }
 
-/* Stile per il contenitore del menu utente */
 #user-menu {
     position: relative;
     display: inline-block;
 }
 
-/* Stile per il menu a tendina */
 #user-menu-content {
     position: absolute;
     top: 100%;
@@ -300,7 +368,6 @@ body {
     overflow-y: auto;
 }
 
-/* Stile per il profilo */
 #update-profile-form input,
 #update-profile-form textarea {
     width: 100%;
@@ -325,7 +392,6 @@ body {
     background-color: #0056b3;
 }
 
-/* Stile per la lista delle aste */
 #user-auctions-list {
     display: flex;
     flex-direction: column;
@@ -416,7 +482,6 @@ body {
     cursor: pointer;
 }
 
-/* Roba nuova */
 .hidden {
     display: none;
 }
@@ -447,3 +512,4 @@ body {
     display: flex;
     justify-content: space-between;
 }
+*/

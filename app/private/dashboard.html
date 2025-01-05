@@ -1,55 +1,92 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body id="dashboard-body">
-    <header class="main-header">
-        <h1>Dashboard Utente</h1>
-        <button id="user-list-button">Elenco Utenti</button>
-        <button id="user-area-button" class="auth-button">Area Utente</button>
-        <button id="logout-button" class="auth-button">Logout</button>
-    </header>
-    <main class="dashboard-main">
-        <section class="dashboard-section">
-            <h2>Aggiungi Asta</h2>
-            <button id="add-auction-button" class="toggle-button">Mostra Form</button>
-            <form id="add-auction-form" class="auction-form" style="display: none;">
-                <input type="text" id="auction-title" placeholder="Titolo" required>
-                <input type="text" id="auction-description" placeholder="Descrizione" required>
-                <input type="number" id="auction-start-price" placeholder="Prezzo di partenza" required>
-                <select id="filter-category" required>
-                    <option value="" disabled selected>Categoria</option>
-                    <option value="Arte">Arte</option>
-                    <option value="Gioielli">Gioielli</option>
-                    <option value="Collezionismo">Collezionismo</option>
-                </select>
-                <input type="date" id="auction-end-date" placeholder="Data di fine" required>
-                <input type="time" id="auction-end-time" placeholder="Ora di fine" required>
-                <button type="submit" class="form-button">Crea Asta</button>
-            </form>
-        </section>
-        <section class="dashboard-section">
-            <h2>Tutte le Aste</h2>
-            <section class="filter-section">
-                <button class="filter-button" data-filter="all">Tutte</button>
-                <button class="filter-button" data-filter="active">Attive</button>
-                <button class="filter-button" data-filter="expired">Scadute</button>
-            </section>
-            <nav class="category-nav">
-                <button class="category-icon">Tutte</button>
-                <button class="category-icon">Arte</button>
-                <button class="category-icon">Gioielli</button>
-                <button class="category-icon">Collezionismo</button>
-            </nav>
-            <div id="auctions-list">
-                <!-- Aste create dall'utente -->
+    <div class="container">
+        <header class="main-header">
+            <div class="header-container">
+                <div class="header-left">
+                    <img src="/images/logo.png" alt="Logo Applicazione" class="app-logo">
+                    <h1>Dashboard Utente <span id="user-greeting"></span></h1>
+                </div>
+                <div class="header-right">
+                    <button id="add-auction-button" class="auth-button">Aggiungi Asta</button>
+                    <button id="user-list-button">Elenco Utenti</button>
+                    <button id="user-area-button" class="auth-button">Area Utente</button>
+                    <button id="logout-button" class="auth-button">Logout</button>
+                </div>
             </div>
-        </section>
-    </main>
+        </header>               
+        <main class="dashboard-main">
+            <div id="popup-modal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <h2>Aggiungi Asta</h2>
+                    <form id="popup-add-auction-form">
+                        <input type="text" id="popup-auction-title" placeholder="Titolo" required>
+                        <input type="text" id="popup-auction-description" placeholder="Descrizione" required>
+                        <input type="number" id="popup-auction-start-price" placeholder="Prezzo di partenza" required>
+                        <select id="popup-filter-category" required>
+                            <option value="" disabled selected>Categoria</option>
+                            <option value="Arte">Arte</option>
+                            <option value="Gioielli">Gioielli</option>
+                            <option value="Collezionismo">Collezionismo</option>
+                            <option value="Moda">Moda</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Vini-whisky">Vini e whisky</option>
+                            <option value="Orologi">Orologi</option>
+                            <option value="Libri">Libri</option>
+                            <option value="Monete-francobolli">Monete e francobolli</option>
+                            <option value="Auto-moto">Auto e moto</option>
+                            <option value="Archeologia">Archeologia</option>
+                        </select>
+                        <input type="date" id="popup-auction-end-date" placeholder="Data di fine" required>
+                        <input type="time" id="popup-auction-end-time" placeholder="Ora di fine" required>
+                        <button type="submit" class="form-button">Crea Asta</button>
+                    </form>
+                </div>
+            </div>
+            
+            <section class="dashboard-section">
+                <div class="search-header">
+                    <h2 class="search-title">Cerca tra le aste</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-button" data-filter="all">Tutte</button>
+                        <button class="filter-button" data-filter="active">Attive</button>
+                        <button class="filter-button" data-filter="expired">Scadute</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>Filtra per Categoria</h3>
+                    <nav class="category-nav">
+                        <button class="category-icon">Tutte</button>
+                        <button class="category-icon">Arte</button>
+                        <button class="category-icon">Gioielli</button>
+                        <button class="category-icon">Collezionismo</button>
+                        <button class="category-icon">Moda</button>
+                        <button class="category-icon">Sport</button>
+                        <button class="category-icon">Vini e whisky</button>
+                        <button class="category-icon">Orologi</button>
+                        <button class="category-icon">Libri</button>
+                        <button class="category-icon">Monete e francobolli</button>
+                        <button class="category-icon">Auto e moto</button>
+                        <button class="category-icon">Archeologia</button>
+                    </nav>
+                </div>
+                
+                <div id="auctions-list">
+                    <!-- Lista delle aste -->
+                </div>
+            </section>
+            
+        </main>
+    </div>
     <script src="js/dashboard.js"></script>
 </body>
 </html>

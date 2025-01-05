@@ -4,32 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Area Utente</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
-<body>
-    <header class="main-header">
-        <h1>Area Utente</h1>
-        <button id="back-to-dashboard" class="auth-button">Torna alla Dashboard</button>
-    </header>
-    <main class="user-main">
-        <!-- Sezione Profilo Utente -->
-        <section id="profile-section">
-            <h2>Profilo Utente</h2>
-            <form id="update-profile-form">
-                <input type="text" id="user-name" placeholder="Nome" required>
-                <input type="text" id="user-surname" placeholder="Cognome" required>
-                <button type="submit" class="form-button">Salva Profilo</button>
-            </form>
-        </section>
-
-        <!-- Sezione delle aste dell'utente -->
-        <section id="user-auctions-section">
-            <h2>Le mie aste</h2>
-            <div id="user-auctions-list">
-                <!-- Qui verranno caricate le aste personali -->
+<body id="dashboard-body">
+    <div class="container">
+        <!-- Header simile alla dashboard -->
+        <header class="main-header">
+            <div class="header-container">
+                <div class="header-left">
+                    <img src="/images/logo.png" alt="Logo Applicazione" class="app-logo">
+                    <h1>Area Utente</h1>
+                </div>
+                <div class="header-right">
+                    <button id="back-to-dashboard" class="auth-button">Torna alla Dashboard</button>
+                </div>
             </div>
-        </section>
-    </main>
+        </header>
+
+        <!-- Main content -->
+        <main class="dashboard-main">
+            <!-- Profilo Utente -->
+            <section class="dashboard-section">
+                <h2>Profilo Utente</h2>
+                <form id="update-profile-form">
+                    <input type="text" id="user-name" placeholder="Nome" required>
+                    <input type="text" id="user-surname" placeholder="Cognome" required>
+                    <button type="submit" class="form-button">Salva Profilo</button>
+                </form>
+            </section>
+
+            <!-- Le mie aste -->
+            <section class="dashboard-section">
+                <h2>Le mie aste</h2>
+                <div id="user-auctions-list" class="auctions-list">
+                    <!-- Le aste personali verranno caricate qui -->
+                </div>
+            </section>
+        </main>
+    </div>
     <script src="js/user-area.js"></script>
 </body>
 </html>

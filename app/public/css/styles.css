@@ -1,4 +1,4 @@
-/* Stile globale */
+/*
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +15,7 @@
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
   color: #333;
-  height: 100vh; /* Per centrare il contenuto */
+  height: 100vh; 
 }
 
 .main-header {
@@ -41,7 +41,6 @@
   width: 100%;
 }
 
-/* Barra di navigazione delle categorie */
 .category-nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -77,83 +76,78 @@
 }
 
 button {
-  font-size: 1rem; /* Dimensione testo */
-  font-weight: bold; /* Testo in grassetto */
-  padding: 0.5rem 1rem; /* Spaziatura interna */
-  border: none; /* Nessun bordo */
-  border-radius: 8px; /* Angoli arrotondati */
-  cursor: pointer; /* Cambia il cursore a mano */
-  transition: all 0.3s ease; /* Transizione fluida */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+  font-size: 1rem; 
+  font-weight: bold; 
+  padding: 0.5rem 1rem; 
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  transition: all 0.3s ease; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
-/* Stile personalizzato per il pulsante di autenticazione */
 #auth-button {
   justify-self: end;
-  background-color: #005A9E; /* Colore principale */
-  color: white; /* Testo bianco */
+  background-color: #005A9E; 
+  color: white; 
 }
 
 #auth-button:hover {
-  background-color: #0078D7; /* Colore al passaggio del mouse */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra più pronunciata */
-  transform: translateY(-2px); /* Solleva il pulsante */
+  background-color: #0078D7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
+  transform: translateY(-2px); 
 }
 
 #auth-button:active {
-  background-color: #003E70; /* Colore quando cliccato */
-  transform: translateY(1px); /* Pulsante abbassato */
+  background-color: #003E70; 
+  transform: translateY(1px); 
 }
 
-/* Stile personalizzato per i pulsanti delle categorie */
 .category-icon {
-  background-color: #0078D7; /* Colore principale */
-  color: white; /* Testo bianco */
+  background-color: #0078D7; 
+  color: white; 
   text-align: center;
 }
 
 .category-icon:hover {
-  background-color: #005A9E; /* Colore al passaggio del mouse */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra più pronunciata */
-  transform: translateY(-2px); /* Solleva il pulsante */
+  background-color: #005A9E; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
+  transform: translateY(-2px); 
 }
 
 .category-icon:active {
-  background-color: #003E70; /* Colore quando cliccato */
-  transform: translateY(1px); /* Pulsante abbassato */
+  background-color: #003E70; 
+  transform: translateY(1px); 
 }
 
-/* Stile per i pulsanti "Select" nella lista delle aste */
 .auction button {
-  background-color: #008C45; /* Colore verde per differenziare */
-  color: white; /* Testo bianco */
-  font-size: 0.9rem; /* Font leggermente più piccolo */
-  padding: 0.4rem 1rem; /* Margine interno ridotto */
+  background-color: #008C45; 
+  color: white; 
+  font-size: 0.9rem; 
+  padding: 0.4rem 1rem; 
 }
 
 .auction button:hover {
-  background-color: #006C34; /* Colore verde scuro al passaggio del mouse */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Ombra più pronunciata */
-  transform: translateY(-2px); /* Solleva il pulsante */
+  background-color: #006C34; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
+  transform: translateY(-2px); 
 }
 
 .auction button:active {
-  background-color: #004D25; /* Colore quando cliccato */
-  transform: translateY(1px); /* Pulsante abbassato */
+  background-color: #004D25; 
+  transform: translateY(1px); 
 }
 
-/* Body per la pagina di login */
 #login-body {
   display: flex;
-  justify-content: center; /* Centra orizzontalmente */
-  align-items: center;    /* Centra verticalmente */
-  height: 100vh;          /* Altezza dell'intera viewport */
-  background-color: #f9f9f9; /* Colore di sfondo */
+  justify-content: center; 
+  align-items: center;   
+  height: 100vh;          
+  background-color: #f9f9f9; 
   font-family: Arial, sans-serif;
   color: #333;
 }
 
-/* Contenitore Login */
 .login-container {
   background: white;
   padding: 2rem;
@@ -164,14 +158,12 @@ button {
   text-align: center;
 }
 
-/* Titolo */
 .login-title {
   font-size: 2rem;
   color: #0078D7;
   margin-bottom: 2rem;
 }
 
-/* Form */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -198,7 +190,6 @@ button {
   box-shadow: 0 0 4px rgba(0, 120, 215, 0.5);
 }
 
-/* Pulsante Login */
 .login-button {
   background-color: #005A9E;
   color: white;
@@ -220,7 +211,6 @@ button {
   background-color: #003E70;
 }
 
-/* Pulsante Signup */
 #signup-button {
   margin-top: 1rem;
   background-color: transparent;
@@ -235,7 +225,6 @@ button {
   color: #005A9E;
 }
 
-/* Banner per messaggi */
 #message-banner {
   display: none;
   padding: 1rem;
@@ -263,3 +252,4 @@ button {
   gap: 1rem;
   margin-top: 10px;
 }
+*/
