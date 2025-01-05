@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifica Asta</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1>Modifica Asta</h1>
+        <button id="back-to-user-area">Torna all'Area Utente</button>
+    </header>
+    <main>
+        <section id="edit-auction-section">
+            <form id="edit-auction-form">
+                <label for="auction-title">Titolo:</label>
+                <input type="text" id="auction-title" required>
+                <label for="auction-description">Descrizione:</label>
+                <textarea id="auction-description" required></textarea>
+                <div class="form-actions">
+                    <button type="submit">Salva Modifiche</button>
+                    <button type="button" id="delete-auction-button" class="danger-button">Elimina Asta</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="js/edit-auction.js"></script>
+</body>
+</html>

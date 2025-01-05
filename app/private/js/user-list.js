@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const userListContainer = document.getElementById("user-list");
     const userWonAuctionsContainer = document.getElementById("user-auctions");
-    const userWonAuctions = document.getElementById("user-won-auctions");
     const backToUserListButton = document.getElementById("back-to-user-list");
     const searchBar = document.getElementById("search-user-bar");
 

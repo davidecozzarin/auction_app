@@ -25,6 +25,73 @@ async function loadAuctions() {
         }
 
         auctionsList.innerHTML = filteredAuctions
+            .map(auction => {
+                const endDate = new Date(auction.endDate);
+                const now = new Date();
+                const isExpired = auction.isExpired || endDate <= now;
+
+                // Calcola il tempo rimanente in ore e minuti o mostra che è terminata
+                let timeRemaining = '';
+                if (!isExpired) {
+                    const totalMinutes = Math.max(0, Math.ceil((endDate - now) / 1000 / 60));
+                    const hours = Math.floor(totalMinutes / 60);
+                    const minutes = totalMinutes % 60;
+                    timeRemaining = `<span class="time-remaining">Tempo Rimanente: ${hours} ore e ${minutes} minuti</span>`;
+                } else {
+                    timeRemaining = '<span class="expired-message">Asta Terminata</span>';
+                }
+
+                return `
+                    <div class="auction" data-auction-id="${auction._id}">
+                        <h3>${auction.title}</h3>
+                        <p><strong>Prezzo corrente:</strong> €${auction.currentBid}</p>
+                        <p>${timeRemaining}</p>
+                        <button class="view-details" data-auction-id="${auction._id}">Vedi Dettagli</button>
+                    </div>
+                `;
+            })
+            .join("");
+
+        // Aggiungi event listener per il pulsante "Vedi Dettagli"
+        document.querySelectorAll(".view-details").forEach(button => {
+            button.addEventListener("click", () => {
+                const auctionId = button.getAttribute("data-auction-id");
+                window.location.href = `auction-details.html?id=${auctionId}`;
+            });
+        });
+    } catch (error) {
+        auctionsList.innerHTML = "Errore durante il caricamento delle aste.";
+        console.error("Error fetching auctions:", error);
+    }
+}
+
+
+/*
+async function loadAuctions() {
+    console.log("Ricarico le aste...");
+
+    // Trova la categoria selezionata
+    const activeCategoryButton = document.querySelector(".category-icon.active");
+    const category = activeCategoryButton ? activeCategoryButton.textContent.trim() : "";
+
+    // Trova il filtro selezionato
+    const activeFilterButton = document.querySelector(".filter-button.active");
+    const filter = activeFilterButton ? activeFilterButton.getAttribute("data-filter") : "all";
+
+    auctionsList.innerHTML = "Caricamento...";
+    try {
+        const response = await fetch(`/api/auctions?category=${category === "Tutte" ? "" : category}`);
+        const auctions = await response.json();
+
+        // Filtra le aste in base al filtro attivo
+        let filteredAuctions = auctions;
+        if (filter === "active") {
+            filteredAuctions = auctions.filter(auction => !auction.isExpired);
+        } else if (filter === "expired") {
+            filteredAuctions = auctions.filter(auction => auction.isExpired);
+        }
+
+        auctionsList.innerHTML = filteredAuctions
         .map(auction => {
             const winnerMessage = auction.isExpired
                 ? auction.winnerName
@@ -98,6 +165,7 @@ async function loadAuctions() {
         console.error("Error fetching auctions:", error);
     }
 }
+
 
 async function loadBids(auctionId) {
     try {
@@ -185,7 +253,7 @@ async function loadBids(auctionId) {
         }
     }
 }
-
+*/
 
 document.getElementById("logout-button").addEventListener("click", () => {
     document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -236,6 +304,7 @@ document.getElementById("add-auction-form").addEventListener("submit", async (e)
         console.error("Errore durante l'aggiunta:", error);
     }
 });
+
 
 // Aggiungi una nuova asta
 document.getElementById("add-auction-button").addEventListener("click", () => {
