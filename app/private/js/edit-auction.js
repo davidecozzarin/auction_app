@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
     const auctionId = params.get("id");
+    const auctionDetails = document.getElementById("auction-details");
+    const auctionTitle = document.getElementById("auction-title");
+    const auctionDescription = document.getElementById("auction-description");
+    
 
     // Torna all'area utente
     document.getElementById("back-to-user-area").addEventListener("click", () => {
@@ -8,17 +12,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Carica i dettagli dell'asta
-    const auctionTitle = document.getElementById("auction-title");
-    const auctionDescription = document.getElementById("auction-description");
-
     try {
         const response = await fetch(`/api/auctions/${auctionId}`);
-        const auction = await response.json();
-        auctionTitle.value = auction.title;
-        auctionDescription.value = auction.description;
+        if (response.ok) {
+            const auction = await response.json();
+            
+            // Popola i dettagli statici
+            auctionDetails.innerHTML = `
+                <p><strong>Titolo:</strong> ${auction.title}</p>
+                <p><strong>Descrizione:</strong> ${auction.description}</p>
+                <p><strong>Prezzo di Partenza:</strong> €${auction.startPrice}</p>
+                <p><strong>Categoria:</strong> ${auction.category}</p>
+                <p><strong>Data di Fine:</strong> ${new Date(auction.endDate).toLocaleString()}</p>
+            `;
+
+            // Prepopola il form
+            auctionTitle.value = auction.title;
+            auctionDescription.value = auction.description;
+        } else {
+            throw new Error("Errore nel caricamento dei dettagli dell'asta.");
+        }
     } catch (error) {
-        alert("Errore durante il caricamento dell'asta.");
-        console.error("Errore:", error);
+        alert("Errore durante il caricamento dei dettagli dell'asta.");
+        console.error(error);
     }
 
     // Salva le modifiche all'asta

@@ -4,24 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aste Online</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body id="index-body">
-    <header class="main-header">
-        <h1>Aste Online</h1>
-        <button id="auth-button">Login</button>
-    </header>
-    <nav class="category-nav">
-        <button class="category-icon">Tutte</button>
-        <button class="category-icon">Arte</button>
-        <button class="category-icon">Gioielli</button>
-        <button class="category-icon">Collezionismo</button>
-    </nav>
-    <main>
-        <section id="auctions-list">
-            <!-- Le aste saranno caricate qui -->
-        </section>
-    </main>
+    <div class="container">
+        <!-- Header principale -->
+        <header class="main-header">
+            <div class="header-container">
+                <div class="header-left">
+                    <img src="/images/logo.png" alt="Logo Applicazione" class="app-logo">
+                    <h1>Aste Online</h1>
+                </div>
+                <div class="header-right">
+                    <button id="auth-button" class="auth-button">Login</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenuto principale -->
+        <main class="dashboard-main">
+            <section class="dashboard-section">
+                <!-- Barra di ricerca -->
+                <div class="search-header">
+                    <h2 class="search-title">Cerca tra le aste</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-button" data-filter="all">Tutte</button>
+                        <button class="filter-button" data-filter="active">Attive</button>
+                        <button class="filter-button" data-filter="expired">Scadute</button>
+                    </div>
+                </div>
+
+                <!-- Filtra per categoria -->
+                <div class="filter-group">
+                    <h3>Filtra per Categoria</h3>
+                    <nav class="category-nav">
+                        <button class="category-icon">Tutte</button>
+                        <button class="category-icon">Arte</button>
+                        <button class="category-icon">Gioielli</button>
+                        <button class="category-icon">Collezionismo</button>
+                        <button class="category-icon">Moda</button>
+                        <button class="category-icon">Sport</button>
+                        <button class="category-icon">Vini e whisky</button>
+                        <button class="category-icon">Orologi</button>
+                        <button class="category-icon">Libri</button>
+                        <button class="category-icon">Monete e francobolli</button>
+                        <button class="category-icon">Auto e moto</button>
+                        <button class="category-icon">Archeologia</button>
+                    </nav>
+                </div>
+
+                <!-- Lista delle aste -->
+                <div id="auctions-list">
+                    <!-- Le aste saranno caricate qui -->
+                </div>
+            </section>
+        </main>
+    </div>
     <script src="js/main.js"></script>
 </body>
 </html>

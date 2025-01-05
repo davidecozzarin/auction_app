@@ -4,18 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dettagli Asta</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
-<body>
-    <header class="main-header">
-        <h1>Dettagli Asta</h1>
-        <button id="back-to-dashboard">Torna alla Dashboard</button>
-    </header>
-    <main>
-        <section id="auction-details">
-            <!-- Dettagli caricati dinamicamente -->
-        </section>
-    </main>
+<body id="dashboard-body">
+    <div class="container">
+        <header class="main-header">
+            <div class="header-container">
+                <div class="header-left">
+                    <img src="/images/logo.png" alt="Logo Applicazione" class="app-logo">
+                    <h1>Dettagli Asta</h1>
+                </div>
+                <div class="header-right">
+                    <button id="back-to-dashboard" class="auth-button">Torna alla Dashboard</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="grid-container">
+                <!-- Dettagli dell'Asta -->
+                <section class="dashboard-section auction-info">
+                    <h2 class="section-title">Informazioni sull'Asta</h2>
+                    <div id="auction-details" class="auction-details">
+                        <!-- Dettagli caricati dinamicamente e input offerte -->
+                    </div>
+                </section>
+
+                <!-- Storico Offerte -->
+                <section class="dashboard-section auction-bids">
+                    <h2 class="section-title">Storico Offerte</h2>
+                    <div id="bids-list" class="bids-list">
+                        <!-- Storico delle offerte caricato dinamicamente -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
     <script src="js/auction-details.js"></script>
 </body>
 </html>

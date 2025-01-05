@@ -4,27 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elenco Utenti</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 </head>
-<body>
-    <header>
-        <h1>Elenco Utenti</h1>
-        <input type="text" id="search-user-bar" placeholder="Cerca un utente...">
-        <button id="back-to-dashboard">Torna alla Dashboard</button>
-    </header>
-    <main>
-        <div id="user-list">
-            <!-- Lista degli utenti -->
-        </div>
-        <div id="user-auctions" style="display: none;">
-            <!-- Aste vinte da un utente -->
-            <button id="back-to-user-list">Torna all'elenco utenti</button>
-            <h2 id="selected-user-name"></h2>
-            <div id="user-won-auctions">
-                <!-- Aste vinte -->
+<body id="dashboard-body" class="user-page">
+    <div class="container">
+        <header class="main-header">
+            <div class="header-container">
+                <div class="header-left">
+                    <img src="/images/logo.png" alt="Logo Applicazione" class="app-logo">
+                    <h1>Elenco Utenti</h1>
+                </div>
+                <div class="header-right">
+                    <button id="back-to-dashboard" class="auth-button">Torna alla Dashboard</button>
+                </div>
             </div>
-        </div>
-    </main>
+        </header>
+
+        <main class="dashboard-main grid-layout">
+            <!-- Lista utenti (colonna sinistra) -->
+            <section id="user-list" class="dashboard-section">
+                <input type="text" id="search-user-bar" class="styled-input" placeholder="Cerca un utente...">
+                <div id="user-list-container">
+                    <!-- Lista degli utenti caricata dinamicamente -->
+                </div>
+            </section>
+
+            <!-- Dettagli aste vinte (colonna destra) -->
+            <section id="user-auctions" class="dashboard-section">
+                <h2 id="selected-user-name"></h2>
+                <div id="user-won-auctions">
+                    <!-- Aste vinte -->
+                </div>
+            </section>
+        </main>
+    </div>
     <script src="js/user-list.js"></script>
 </body>
 </html>

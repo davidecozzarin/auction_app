@@ -33,20 +33,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                 isAuctionExpired
                     ? `<p class="expired-message" style="color: red">L'asta è terminata</p>`
                     : ""
-            }
-            <div id="bids-list">
-                <h3>Storico Offerte</h3>
-                <!-- Offerte caricate dinamicamente -->
-            </div>
-        `;
+            }`;
 
         // Aggiungi il form per le offerte solo se l'asta non è terminata
         if (!isAuctionExpired) {
             const bidForm = document.createElement("form");
             bidForm.id = "bid-form";
             bidForm.innerHTML = `
-                <input type="number" id="bid-amount" placeholder="Inserisci la tua offerta" required>
-                <button type="submit">Effettua Offerta</button>
+                <div class="bid-input-container">
+                    <input type="number" id="bid-amount" class="styled-input" placeholder="Inserisci la tua offerta" required>
+                    <button type="submit" class="styled-button">Effettua Offerta</button>
+                </div>
             `;
             auctionDetails.appendChild(bidForm);
 

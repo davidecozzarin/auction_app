@@ -32,7 +32,6 @@
                         <input type="text" id="popup-auction-description" placeholder="Descrizione" required>
                         <input type="number" id="popup-auction-start-price" placeholder="Prezzo di partenza" required>
                         <select id="popup-filter-category" required>
-                            <option value="" disabled selected>Categoria</option>
                             <option value="Arte">Arte</option>
                             <option value="Gioielli">Gioielli</option>
                             <option value="Collezionismo">Collezionismo</option>
@@ -45,12 +44,13 @@
                             <option value="Auto-moto">Auto e moto</option>
                             <option value="Archeologia">Archeologia</option>
                         </select>
-                        <input type="date" id="popup-auction-end-date" placeholder="Data di fine" required>
-                        <input type="time" id="popup-auction-end-time" placeholder="Ora di fine" required>
+                        <label for="popup-auction-end-date">Data e ora di termine asta</label>
+                        <input type="date" id="popup-auction-end-date" required>
+                        <input type="time" id="popup-auction-end-time" required>
                         <button type="submit" class="form-button">Crea Asta</button>
                     </form>
                 </div>
-            </div>
+            </div>            
             
             <section class="dashboard-section">
                 <div class="search-header">

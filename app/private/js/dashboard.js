@@ -75,7 +75,6 @@ document.getElementById("logout-button").addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const categoryButtons = document.querySelectorAll(".category-icon");
 
-
     function updateActiveButton(activeButton) {
         categoryButtons.forEach(button => {
             button.classList.remove("active");

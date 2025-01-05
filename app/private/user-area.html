@@ -8,7 +8,6 @@
 </head>
 <body id="dashboard-body">
     <div class="container">
-        <!-- Header simile alla dashboard -->
         <header class="main-header">
             <div class="header-container">
                 <div class="header-left">
@@ -16,6 +15,7 @@
                     <h1>Area Utente</h1>
                 </div>
                 <div class="header-right">
+                    <button id="edit-profile-button" class="auth-button">Modifica Profilo</button>
                     <button id="back-to-dashboard" class="auth-button">Torna alla Dashboard</button>
                 </div>
             </div>
@@ -23,16 +23,6 @@
 
         <!-- Main content -->
         <main class="dashboard-main">
-            <!-- Profilo Utente -->
-            <section class="dashboard-section">
-                <h2>Profilo Utente</h2>
-                <form id="update-profile-form">
-                    <input type="text" id="user-name" placeholder="Nome" required>
-                    <input type="text" id="user-surname" placeholder="Cognome" required>
-                    <button type="submit" class="form-button">Salva Profilo</button>
-                </form>
-            </section>
-
             <!-- Le mie aste -->
             <section class="dashboard-section">
                 <h2>Le mie aste</h2>
@@ -41,6 +31,23 @@
                 </div>
             </section>
         </main>
+
+        <!-- Modale per la modifica del profilo -->
+        <div id="profile-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Modifica Profilo</h2>
+                <form id="popup-edit-profile-form">
+                    <label for="popup-user-name">Nome</label>
+                    <input type="text" id="popup-user-name" placeholder="Inserisci il tuo nome" required>
+        
+                    <label for="popup-user-surname">Cognome</label>
+                    <input type="text" id="popup-user-surname" placeholder="Inserisci il tuo cognome" required>
+        
+                    <button type="submit" class="form-button">Salva Profilo</button>
+                </form>
+            </div>
+        </div>        
     </div>
     <script src="js/user-area.js"></script>
 </body>

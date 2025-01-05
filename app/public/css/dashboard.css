@@ -13,6 +13,8 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 .container {
@@ -257,6 +259,7 @@ button:disabled {
     align-items: center;
     z-index: 1000;
     transition: opacity 0.3s ease;
+    text-align: center; /* Centra il testo */
 }
 
 /* Nascondi il popup */
@@ -276,16 +279,57 @@ button:disabled {
     animation: fadeIn 0.3s ease;
 }
 
-/* Animazione di apertura */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* Stile per i form nei popup */
+.modal-content form {
+    display: flex;
+    flex-direction: column; /* Disposizione verticale */
+    gap: 15px; /* Spaziatura tra i campi */
+    align-items: center; /* Centra i contenuti */
+}
+
+/* Etichette per i campi */
+.modal-content form label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    width: 90%; /* Occupa tutta la larghezza */
+}
+
+/* Input box */
+.modal-content form input,
+.modal-content form select {
+    width: 90%; /* Riduci la larghezza degli input */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease;
+}
+
+.modal-content form input:focus,
+.modal-content form select:focus {
+    border-color: #0056b3; /* Cambia colore al focus */
+    outline: none;
+}
+
+/* Pulsanti dei form */
+.modal-content form .form-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #0078D7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content form .form-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
 /* Pulsante di chiusura */
@@ -299,6 +343,49 @@ button:disabled {
     border: none;
     background: none;
 }
+
+/* Titolo del form */
+.modal-content h2 {
+    font-size: 1.8rem;
+    color: #0056b3;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Contenitore degli errori */
+.modal-content form .error-message {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-top: -10px;
+    text-align: center;
+}
+
+
+/* Animazione di apertura */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Pulsante di chiusura */
+.close-button {
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    float: right;
+    margin-top: -10px;
+    margin-right: -10px;
+    border: none;
+    background: none;
+}
+
 
 /* Stile lista aste */
 /* Stile per i riquadri delle aste */
@@ -405,4 +492,290 @@ button:disabled {
 
 #update-profile-form .form-button:hover {
     background-color: #0056b3;
+}
+
+
+/* regole per il form in edit auction */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form label {
+    font-weight: bold;
+    color: #0056b3;
+    text-align: left;
+}
+
+form input, form textarea, form select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+form textarea {
+    font-family: Arial, sans-serif; 
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+}
+
+form .form-button {
+    align-self: center;
+    background-color: #0078D7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+}
+
+form .delete-button {
+    background-color: #d9534f;
+}
+
+form .form-button:hover {
+    background-color: #0056b3;
+}
+
+form .delete-button:hover {
+    background-color: #b52a1f;
+}
+
+
+/* auction details */
+/* Layout a griglia per i dettagli e lo storico */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.auction-info {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+.auction-bids {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+.auction-details p,
+.bids-list p {
+    margin: 10px 0;
+}
+
+.bids-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.bids-list li {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+form#bid-form {
+    margin: 0; /* Elimina i margini esterni */
+    padding: 0; /* Rimuovi eventuali padding interni */
+}
+
+/* Contenitore del form */
+.bid-input-container {
+    display: flex;
+    gap: 10px; /* Spaziatura tra input e bottone */
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* User list */
+
+.user-page .dashboard-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Prima colonna 1fr, seconda colonna 2fr */
+    gap: 20px; /* Spaziatura tra le sezioni */
+}
+/* Barra di ricerca utenti */
+#search-user-bar {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#search-user-bar:focus {
+    border-color: #0078D7;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 120, 215, 0.3);
+}
+
+/* Stile per la lista utenti */
+#user-list .user {
+    display: flex; /* Layout flessibile */
+    justify-content: space-between; /* Spazia contenuto e bottone */
+    align-items: center; /* Allinea verticalmente al centro */
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 20px; /* Aggiunta padding */
+    margin-bottom: 10px; /* Spaziatura tra i box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#user-list .user span {
+    font-size: 1rem;
+    color: #333; /* Colore del testo */
+    flex-grow: 1; /* Prende lo spazio disponibile */
+    margin-right: 10px; /* Spaziatura dal bottone */
+}
+
+#user-list .view-auctions-button {
+    background-color: #0078D7; /* Colore del bottone */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#user-list .view-auctions-button:hover {
+    background-color: #0056b3; /* Colore al passaggio del mouse */
+    transform: translateY(-2px); /* Leggero sollevamento */
+}
+
+/* Sezione delle aste vinte */
+#user-auctions {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#user-auctions h2 {
+    color: #0056b3;
+    margin-bottom: 20px;
+}
+
+#user-won-auctions {
+    display: flex;
+    flex-wrap: wrap; /* Permette il ritorno a capo */
+    gap: 10px; /* Spaziatura tra i blocchi */
+    justify-content: flex-start; /* Allinea gli elementi a sinistra */
+    padding: 10px; /* Spazio interno */
+}
+
+#user-won-auctions .auction {
+    background-color: #f9f9f9; /* Sfondo chiaro */
+    border: 1px solid #ddd; /* Bordo sottile */
+    border-radius: 8px; /* Angoli arrotondati */
+    width: 270px; /* Larghezza uniforme */
+    display: flex;
+    flex-direction: column; /* Disposizione verticale del contenuto */
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombreggiatura */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animazione */
+}
+
+#user-won-auctions .auction:hover {
+    transform: translateY(-5px); /* Effetto sollevamento al passaggio del mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata */
+}
+
+#user-won-auctions .auction h4 {
+    font-size: 1.2rem;
+    color: #0056b3; /* Colore principale */
+    margin-bottom: 10px;
+}
+
+#user-won-auctions .auction p {
+    margin: 5px 0; /* Spaziatura uniforme */
+    color: #333;
+}
+
+#user-won-auctions .auction strong {
+    font-weight: bold; /* Evidenzia il testo importante */
+}
+
+/* login */
+/* Contenitore principale per login e signup */
+.login-container {
+    background: white; /* Sfondo bianco */
+    border-radius: 8px; /* Angoli arrotondati */
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra */
+    text-align: center;
+    
+}
+
+/* Titolo delle pagine */
+.login-title {
+    font-size: 2rem;
+    color: #0056b3; /* Colore primario */
+    margin-bottom: 20px;
+}
+
+/* Stile per i campi di input */
+.login-form input {
+    width: 100%;
+    margin: 10px 0; /* Spaziatura tra i campi */
+    border: 1px solid #ddd; /* Bordo sottile */
+    border-radius: 5px; /* Angoli arrotondati */
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.login-form input:focus {
+    border-color: #0078D7; /* Colore al focus */
+    outline: none;
+}
+
+/* Stile per il banner dei messaggi */
+#message-banner {
+    display: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Messaggi di successo */
+#message-banner.success {
+    background-color: #d4edda; /* Verde chiaro */
+    color: #155724;
+}
+
+/* Messaggi di errore */
+#message-banner.error {
+    background-color: #f8d7da; /* Rosso chiaro */
+    color: #721c24;
 }
