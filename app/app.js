@@ -1,10 +1,9 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const authRoutes = require("./auth.js");
+const authRoutes = require("./auth.js"); // Import delle rotte di autenticazione
 const auctionRoutes = require("./route.js");
 const path = require("path");
 const verifyToken = require("./middleware/authMiddleware"); 
-
 
 const app = express();
 
@@ -16,7 +15,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Rotte di autenticazione e API
-//app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api", auctionRoutes);
 
 // Gestione risorse protette se serve qui
