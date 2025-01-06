@@ -360,6 +360,28 @@ button:disabled {
     text-align: center;
 }
 
+/* Link stilizzato per "Registrati" */
+.modal-content .link-button {
+    color: #0078D7;
+    text-decoration: underline;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-content .link-button:hover {
+    color: #0056b3;
+    text-decoration: none; /* Rimuove la sottolineatura al passaggio del mouse */
+}
+
+/* Regola il paragrafo con il link */
+.modal-content p {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+}
+
 
 /* Animazione di apertura */
 @keyframes fadeIn {

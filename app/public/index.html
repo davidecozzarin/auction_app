@@ -59,7 +59,42 @@
                 </div>
             </section>
         </main>
+        <!-- Login Modal -->
+        <div id="login-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Login</h2>
+                <form id="login-form" class="login-form">
+                    <input type="text" id="login-username" placeholder="Username" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="submit">Accedi</button>
+                </form>
+                <p class="signup-link">
+                    <span id="open-signup-modal" class="link-button">Non hai un account? Registrati</span>
+                </p>                
+            </div>
+        </div>
+
+        <!-- Signup Modal -->
+        <div id="signup-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Registrati</h2>
+                <form id="signup-form" class="login-form">
+                    <input type="text" id="signup-username" placeholder="Username" required>
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <input type="text" id="signup-name" placeholder="Nome" required>
+                    <input type="text" id="signup-surname" placeholder="Cognome" required>
+                    <button type="submit">Registrati</button>
+                </form>
+                <p class="signin-link">
+                    <span id="open-login-modal" class="link-button">Non hai un account? Registrati</span>
+                </p>                
+            </div>
+        </div>
+        
     </div>
-    <script src="js/main.js"></script>
+
+    <script src="js/index.js"></script>
 </body>
 </html>
