@@ -1,11 +1,9 @@
-/* Reset di base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Stile globale */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -13,8 +11,8 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    justify-content: center; /* Centra orizzontalmente */
-    align-items: center; /* Centra verticalmente */
+    justify-content: center;
+    align-items: center; 
 }
 
 .container {
@@ -27,62 +25,58 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0056b3; /* Azzurro scuro */
+    background-color: #0056b3; 
     color: white;
     padding: 1rem;
     border-radius: 8px;
-    margin-bottom: 5px; /* Spazio sotto l'header */
+    margin-bottom: 5px; 
 }
 
 .header-container {
-    display: flex; /* Abilita il layout flex */
-    justify-content: center; /* Spaziatura tra il contenuto dei due div */
-    align-items: stretch; /* Allinea verticalmente gli elementi */
-    gap: 20px; /* Spaziatura tra le colonne */
-    width: 100%; /* Occupa tutta la larghezza disponibile */
-    max-width: 1200px; /* Larghezza massima */
-    margin: 0; /* Centra il contenitore */
-    padding: 0 20px; /* Spaziatura interna */
+    display: flex; 
+    justify-content: center;
+    align-items: stretch; 
+    gap: 20px; 
+    width: 100%; 
+    max-width: 1200px;
+    margin: 0;
+    padding: 0 20px; 
 }
 
 .header-left {
-    display: flex; /* Layout in linea per logo e titolo */
+    display: flex; 
     align-items: center;
-    gap: 10px; /* Spaziatura tra logo e titolo */
-    justify-content: flex-start; /* Allinea gli elementi a sinistra */
-    flex: 1; /* Occupa tutto lo spazio disponibile a sinistra */
+    gap: 10px; 
+    justify-content: flex-start; 
+    flex: 1; 
 }
 
 .header-right {
-    display: flex; /* Layout in linea per i pulsanti */
-    justify-content: flex-end; /* Allinea gli elementi a sinistra */
-    gap: 10px; /* Spaziatura tra i pulsanti */
+    display: flex; 
+    justify-content: flex-end; 
+    gap: 10px; 
     flex: 0;
 }
 
 .app-logo {
-    width: 40px; /* Regola la larghezza del logo */
-    height: auto; /* Mantiene le proporzioni */
+    width: 40px; 
+    height: auto; 
 }
 
 .header-container h1 {
-    font-size: 1.5rem; /* Riduci la dimensione del testo per adattarlo */
-    margin: 0; /* Rimuovi margini extra */
-    white-space: nowrap; /* Impedisce il ritorno a capo */
-    overflow: hidden; /* Nasconde il testo in eccesso */
-    text-overflow: ellipsis; /* Aggiunge "..." se il testo supera lo spazio disponibile */
+    font-size: 1.5rem; 
+    margin: 0; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
-
-
-/* Layout principale */
 .dashboard-main {
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-/* Stile per le sezioni */
 .dashboard-section {
     background: white;
     border-radius: 8px;
@@ -90,14 +84,13 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Sezione principale con dimensione fissa */
 .fixed-size {
-    max-width: 90%; /* Assicura che non superi i limiti */
-    width: 90%; /* Occupa tutto lo spazio disponibile */
-    overflow: hidden; /* Nasconde contenuti che escono */
-    word-wrap: break-word; /* Manda a capo le parole lunghe */
-    overflow-wrap: break-word; /* Compatibilità per browser moderni */
-    white-space: normal; /* Per il testo */
+    max-width: 90%; 
+    width: 90%; 
+    overflow: hidden; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: normal; 
 }
 
 .dashboard-section h2 {
@@ -105,19 +98,15 @@ body {
     margin-bottom: 10px;
 }
 
-/* Stile filtri */
-
-/* Contenitore del filtro per stato e titolo */
 .search-header {
     display: flex;
-    flex-direction: column; /* Disposizione verticale degli elementi */
-    align-items: center; /* Centra gli elementi orizzontalmente */
-    justify-content: center; /* Centra gli elementi verticalmente */
-    margin-bottom: 10px; /* Spazio tra la sezione e il resto del contenuto */
-    text-align: center; /* Centrare il testo per sicurezza */
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    margin-bottom: 10px; 
+    text-align: center; 
 }
 
-/* Bottone del filtro stato */
 .filter-buttons {
     display: flex;
     gap: 10px;
@@ -144,14 +133,12 @@ body {
     font-weight: bold;
 }
 
-/* Titolo "Cerca tra le aste" */
 .search-title {
-    font-size: 1.8rem; /* Dimensione del font per dare risalto */
-    color: #0056b3; /* Colore del titolo */
-    margin-bottom: 15px; /* Spazio tra il titolo e i bottoni */
+    font-size: 1.8rem; 
+    color: #0056b3; 
+    margin-bottom: 15px; 
 }
 
-/* Contenitore del filtro per categoria */
 .filter-group {
     background: #ffffff;
     border-radius: 8px;
@@ -160,7 +147,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Titolo del filtro per categoria */
 .filter-group h3 {
     font-size: 1.5rem;
     margin-bottom: 15px;
@@ -168,7 +154,6 @@ body {
     text-align: center;
 }
 
-/* Bottoni per categoria */
 .category-nav {
     display: flex;
     flex-wrap: wrap;
@@ -192,93 +177,83 @@ body {
 }
 
 .category-icon.active {
-    background-color: #ffaa00; /* Arancione */
+    background-color: #ffaa00; 
     color: white;
     font-weight: bold;
 }
 
-/* Pulsanti */
-/* Stile per i pulsanti */
 button {
     display: inline-block;
-    padding: 8px 12px; /* Dimensioni più compatte */
-    font-size: 0.9rem; /* Leggermente più piccolo */
+    padding: 8px 12px; 
+    font-size: 0.9rem; 
     border: none;
-    border-radius: 5px; /* Bordo arrotondato */
+    border-radius: 5px; 
     cursor: pointer;
-    transition: all 0.3s ease; /* Transizione per hover */
-    background-color: #0078D7; /* Colore di sfondo primario */
-    color: white; /* Colore del testo */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Leggera ombra */
-    font-weight: 500; /* Testo leggermente in grassetto */
+    transition: all 0.3s ease; 
+    background-color: #0078D7; 
+    color: white; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    font-weight: 500; 
 }
 
-/* Effetto hover */
 button:hover {
-    background-color: #005A9E; /* Colore di sfondo più scuro al passaggio del mouse */
-    transform: translateY(-2px); /* Leggero sollevamento */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Aumenta l'ombra */
+    background-color: #005A9E; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); 
 }
 
-/* Pulsanti disattivati (se necessario) */
 button:disabled {
-    background-color: #cccccc; /* Grigio chiaro */
-    color: #666666; /* Testo grigio scuro */
-    cursor: not-allowed; /* Blocco interazione */
+    background-color: #cccccc; 
+    color: #666666; 
+    cursor: not-allowed; 
     box-shadow: none;
 }
-/* Pulsanti nella header con sfumatura */
+
 .header-right button {
-    padding: 6px 12px; /* Dimensioni compatte */
-    font-size: 0.8rem; /* Testo più piccolo */
-    margin: 0 5px; /* Spaziatura tra i pulsanti */
+    padding: 6px 12px; 
+    font-size: 0.8rem; 
+    margin: 0 5px;
     border: none;
-    border-radius: 5px; /* Angoli arrotondati */
-    background: linear-gradient(to right, #ffffff, #dbeeff); /* Sfumatura chiara */
-    color: #005A9E; /* Testo in tema */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+    border-radius: 5px; 
+    background: linear-gradient(to right, #ffffff, #dbeeff);
+    color: #005A9E; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     font-weight: 500;
-    transition: all 0.3s ease; /* Animazione per hover */
+    transition: all 0.3s ease; 
 }
 
-/* Effetto hover per i pulsanti nella header */
 .header-right button:hover {
-    background: linear-gradient(to right, #dbeeff, #b0d8ff); /* Sfumatura leggermente più scura */
-    color: #003E70; /* Testo più scuro */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata */
-    transform: translateY(-2px); /* Leggero sollevamento */
+    background: linear-gradient(to right, #dbeeff, #b0d8ff); 
+    color: #003E70; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-2px); 
 }
 
-/* Pulsanti attivi */
 .header-right button:active {
-    background: linear-gradient(to right, #b0d8ff, #91c7ff); /* Sfumatura ancora più scura */
-    transform: translateY(0); /* Rimuovi sollevamento */
+    background: linear-gradient(to right, #b0d8ff, #91c7ff); 
+    transform: translateY(0); 
 }
 
-/*modale*/
-/* Stile base per il popup */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     transition: opacity 0.3s ease;
-    text-align: center; /* Centra il testo */
+    text-align: center; 
 }
 
-/* Nascondi il popup */
 .hidden {
     display: none;
     opacity: 0;
 }
 
-/* Contenuto del popup */
 .modal-content {
     background: white;
     padding: 20px;
@@ -289,27 +264,24 @@ button:disabled {
     animation: fadeIn 0.3s ease;
 }
 
-/* Stile per i form nei popup */
 .modal-content form {
     display: flex;
-    flex-direction: column; /* Disposizione verticale */
-    gap: 15px; /* Spaziatura tra i campi */
-    align-items: center; /* Centra i contenuti */
+    flex-direction: column; 
+    gap: 15px; 
+    align-items: center; 
 }
 
-/* Etichette per i campi */
 .modal-content form label {
     font-size: 1rem;
     font-weight: bold;
     color: #333;
     text-align: left;
-    width: 90%; /* Occupa tutta la larghezza */
+    width: 90%; 
 }
 
-/* Input box */
 .modal-content form input,
 .modal-content form select {
-    width: 90%; /* Riduci la larghezza degli input */
+    width: 90%; 
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ddd;
@@ -320,11 +292,10 @@ button:disabled {
 
 .modal-content form input:focus,
 .modal-content form select:focus {
-    border-color: #0056b3; /* Cambia colore al focus */
+    border-color: #0056b3; 
     outline: none;
 }
 
-/* Pulsanti dei form */
 .modal-content form .form-button {
     padding: 10px 20px;
     font-size: 1rem;
@@ -342,7 +313,6 @@ button:disabled {
     transform: translateY(-2px);
 }
 
-/* Pulsante di chiusura */
 .close-button {
     font-size: 1.5rem;
     color: #333;
@@ -354,7 +324,6 @@ button:disabled {
     background: none;
 }
 
-/* Titolo del form */
 .modal-content h2 {
     font-size: 1.8rem;
     color: #0056b3;
@@ -362,7 +331,6 @@ button:disabled {
     text-align: center;
 }
 
-/* Contenitore degli errori */
 .modal-content form .error-message {
     color: #d9534f;
     font-size: 0.9rem;
@@ -370,7 +338,6 @@ button:disabled {
     text-align: center;
 }
 
-/* Link stilizzato per "Registrati" */
 .modal-content .link-button {
     color: #0078D7;
     text-decoration: underline;
@@ -381,10 +348,9 @@ button:disabled {
 
 .modal-content .link-button:hover {
     color: #0056b3;
-    text-decoration: none; /* Rimuove la sottolineatura al passaggio del mouse */
+    text-decoration: none; 
 }
 
-/* Regola il paragrafo con il link */
 .modal-content p {
     font-size: 0.9rem;
     text-align: center;
@@ -392,8 +358,6 @@ button:disabled {
     color: #333;
 }
 
-
-/* Animazione di apertura */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -405,8 +369,6 @@ button:disabled {
     }
 }
 
-
-/* Pulsante di chiusura */
 .close-button {
     font-size: 1.5rem;
     color: #333;
@@ -418,34 +380,31 @@ button:disabled {
     background: none;
 }
 
-
-/* Stile lista aste */
-/* Stile per i riquadri delle aste */
 #auctions-list {
     display: flex;
-    flex-wrap: wrap; /* Permette il ritorno a capo degli elementi */
-    gap: 20px; /* Spaziatura tra i riquadri */
-    justify-content: flex-start; /* Allinea i riquadri a sinistra */
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: flex-start;
     padding: 20px;
 }
 
 .auction {
-    background-color: #f9f9f9; /* Sfondo chiaro */
-    border: 1px solid #ddd; /* Bordo sottile */
-    border-radius: 8px; /* Angoli arrotondati */
-    width: 300px; /* Larghezza fissa */
-    height: 200px; /* Altezza fissa */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    width: 300px; 
+    height: 200px; 
     display: flex;
-    flex-direction: column; /* Disposizione verticale del contenuto */
-    justify-content: center; /* Centra verticalmente il contenuto */
-    align-items: center; /* Centra orizzontalmente il contenuto */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombreggiatura */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animazioni */
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .auction:hover {
-    transform: translateY(-5px); /* Effetto di sollevamento al passaggio del mouse */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombreggiatura più forte */
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 
 .auction h3 {
@@ -484,13 +443,11 @@ button:disabled {
     font-weight: bold;
 }
 
-/* regole specifiche per user-area.html */
-/* Specifico per l'Area Utente */
 #user-auctions-list {
     display: flex;
-    flex-wrap: wrap; /* Consente il ritorno a capo */
-    gap: 20px; /* Spaziatura tra i riquadri */
-    justify-content: flex-start; /* Allinea i riquadri a sinistra */
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: flex-start; 
     padding: 20px;
 }
 
@@ -510,7 +467,7 @@ button:disabled {
 }
 
 #update-profile-form .form-button {
-    align-self: center; /* Centra il pulsante */
+    align-self: center;
     background-color: #0078D7;
     color: white;
     border: none;
@@ -525,8 +482,6 @@ button:disabled {
     background-color: #0056b3;
 }
 
-
-/* regole per il form in edit auction */
 form {
     display: flex;
     flex-direction: column;
@@ -584,8 +539,6 @@ form .delete-button:hover {
     background-color: #b52a1f;
 }
 
-/* auction details */
-/* Layout a griglia per i dettagli e lo storico */
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -603,15 +556,15 @@ form .delete-button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 100%;
     overflow: hidden;
-    flex-direction: column; /* Disposizione verticale del contenuto */
+    flex-direction: column; 
 }
 
 .auction-details,
 .bids-list p {
     margin: 10px 0;
-    word-wrap: break-word; /* Permette di andare a capo se il testo è troppo lungo */
-    overflow-wrap: break-word; /* Compatibilità con browser moderni */
-    white-space: normal; /* Assicura che il testo vada a capo */
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: normal; 
 }
 
 .bids-list ul {
@@ -628,25 +581,23 @@ form .delete-button:hover {
 }
 
 form#bid-form {
-    margin: 0; /* Elimina i margini esterni */
-    padding: 0; /* Rimuovi eventuali padding interni */
+    margin: 0; 
+    padding: 0;
 }
 
-/* Contenitore del form */
 .bid-input-container {
     display: flex;
-    gap: 10px; /* Spaziatura tra input e bottone */
+    gap: 10px; 
     align-items: center;
     margin-top: 10px;
 }
 
-/* User list */
 .user-page .dashboard-main {
     display: grid;
-    grid-template-columns: 1fr 2fr; /* Prima colonna 1fr, seconda colonna 2fr */
-    gap: 20px; /* Spaziatura tra le sezioni */
+    grid-template-columns: 1fr 2fr; 
+    gap: 20px; 
 }
-/* Barra di ricerca utenti */
+
 #search-user-bar {
     width: 100%;
     padding: 10px;
@@ -663,28 +614,27 @@ form#bid-form {
     box-shadow: 0 4px 6px rgba(0, 120, 215, 0.3);
 }
 
-/* Stile per la lista utenti */
 #user-list .user {
-    display: flex; /* Layout flessibile */
-    justify-content: space-between; /* Spazia contenuto e bottone */
-    align-items: center; /* Allinea verticalmente al centro */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
     background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px 20px; /* Aggiunta padding */
-    margin-bottom: 10px; /* Spaziatura tra i box */
+    padding: 10px 20px; 
+    margin-bottom: 10px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #user-list .user span {
     font-size: 1rem;
-    color: #333; /* Colore del testo */
-    flex-grow: 1; /* Prende lo spazio disponibile */
-    margin-right: 10px; /* Spaziatura dal bottone */
+    color: #333; 
+    flex-grow: 1; 
+    margin-right: 10px; 
 }
 
 #user-list .view-auctions-button {
-    background-color: #0078D7; /* Colore del bottone */
+    background-color: #0078D7; 
     color: white;
     padding: 8px 15px;
     border: none;
@@ -696,11 +646,10 @@ form#bid-form {
 }
 
 #user-list .view-auctions-button:hover {
-    background-color: #0056b3; /* Colore al passaggio del mouse */
-    transform: translateY(-2px); /* Leggero sollevamento */
+    background-color: #0056b3; 
+    transform: translateY(-2px); 
 }
 
-/* Sezione delle aste vinte */
 #user-auctions {
     padding: 20px;
     border-radius: 8px;
@@ -714,40 +663,40 @@ form#bid-form {
 
 #user-won-auctions {
     display: flex;
-    flex-wrap: wrap; /* Permette il ritorno a capo */
-    gap: 10px; /* Spaziatura tra i blocchi */
-    justify-content: flex-start; /* Allinea gli elementi a sinistra */
-    padding: 10px; /* Spazio interno */
+    flex-wrap: wrap; 
+    gap: 10px; 
+    justify-content: flex-start; 
+    padding: 10px; 
 }
 
 #user-won-auctions .auction {
-    background-color: #f9f9f9; /* Sfondo chiaro */
-    border: 1px solid #ddd; /* Bordo sottile */
-    border-radius: 8px; /* Angoli arrotondati */
-    width: 270px; /* Larghezza uniforme */
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    width: 270px; 
     display: flex;
-    flex-direction: column; /* Disposizione verticale del contenuto */
+    flex-direction: column; 
     padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombreggiatura */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animazione */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #user-won-auctions .auction:hover {
-    transform: translateY(-5px); /* Effetto sollevamento al passaggio del mouse */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata */
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 #user-won-auctions .auction h4 {
     font-size: 1.2rem;
-    color: #0056b3; /* Colore principale */
+    color: #0056b3;
     margin-bottom: 10px;
 }
 
 #user-won-auctions .auction p {
-    margin: 5px 0; /* Spaziatura uniforme */
+    margin: 5px 0; 
     color: #333;
 }
 
 #user-won-auctions .auction strong {
-    font-weight: bold; /* Evidenzia il testo importante */
+    font-weight: bold;
 }
