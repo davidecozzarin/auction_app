@@ -2,7 +2,6 @@ export class AuctionLoader {
     constructor(renderTemplate) {
         this.renderTemplate = renderTemplate;
     }
-
     async load(category = "", filter = "all", auctionsList) {
         console.log("Caricamento delle aste...");
         auctionsList.innerHTML = "Caricamento...";
@@ -16,7 +15,6 @@ export class AuctionLoader {
             } else if (filter === "expired") {
                 filteredAuctions = auctions.filter(auction => auction.isExpired);
             }
-
             auctionsList.innerHTML = filteredAuctions
                 .map(auction => this.renderTemplate(auction))
                 .join("");
@@ -26,7 +24,6 @@ export class AuctionLoader {
         }
     }
 }
-
 export function updateActiveButton(buttons, activeButton) {
     buttons.forEach(button => button.classList.remove("active"));
     activeButton.classList.add("active");
