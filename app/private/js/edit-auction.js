@@ -5,19 +5,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const auctionTitle = document.getElementById("auction-title");
     const auctionDescription = document.getElementById("auction-description");
     
-
-    // Torna all'area utente
     document.getElementById("back-to-user-area").addEventListener("click", () => {
         window.location.href = "user-area.html";
     });
 
-    // Carica i dettagli dell'asta
     try {
         const response = await fetch(`/api/auctions/${auctionId}`);
         if (response.ok) {
             const auction = await response.json();
             
-            // Popola i dettagli statici
             auctionDetails.innerHTML = `
                 <p><strong>Titolo:</strong> ${auction.title}</p>
                 <p><strong>Descrizione:</strong> ${auction.description}</p>
@@ -26,7 +22,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p><strong>Data di Fine:</strong> ${new Date(auction.endDate).toLocaleString()}</p>
             `;
 
-            // Prepopola il form
             auctionTitle.value = auction.title;
             auctionDescription.value = auction.description;
         } else {
@@ -37,7 +32,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error(error);
     }
 
-    // Salva le modifiche all'asta
     document.getElementById("edit-auction-form").addEventListener("submit", async (e) => {
         e.preventDefault();
         try {
@@ -49,12 +43,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                     description: auctionDescription.value.trim(),
                 }),
             });
-
             if (response.ok) {
                 alert("Asta aggiornata con successo!");
                 window.location.href = "user-area.html";
             } else {
-                const errorData = await response.json(); // Leggi i dettagli dell'errore dal backend
+                const errorData = await response.json(); 
                 alert(`Errore: ${errorData.msg}`);
             }
         } catch (error) {
@@ -62,7 +55,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Elimina l'asta
     document.getElementById("delete-auction-button").addEventListener("click", async () => {
         if (confirm("Sei sicuro di voler eliminare questa asta?")) {
             try {

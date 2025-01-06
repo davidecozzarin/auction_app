@@ -4,12 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedUserName = document.getElementById("selected-user-name");
     const searchBar = document.getElementById("search-user-bar");
 
-    // Torna alla dashboard
     document.getElementById("back-to-dashboard").addEventListener("click", () => {
         window.location.href = "dashboard.html";
     });
 
-    // Carica gli utenti e le aste
     async function loadUsersAndAuctions(query = "") {
         try {
             const usersResponse = await fetch(`/api/users?q=${query}`);
@@ -20,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Mostra la lista degli utenti
     function renderUserList(users) {
         userListContainer.innerHTML = users
             .map(user => `
@@ -31,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
             `)
             .join("");
 
-        // Aggiungi eventi ai bottoni "Visualizza"
         document.querySelectorAll(".view-auctions-button").forEach(button => {
             button.addEventListener("click", () => {
                 const userId = button.getAttribute("data-user-id");
@@ -41,17 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Carica le aste vinte da un utente
     async function loadUserAuctions(userId) {
         try {
             const auctionsResponse = await fetch(`/api/auctions`);
             const auctions = await auctionsResponse.json();
             const userResponse = await fetch(`/api/users/${userId}`);
             const user = await userResponse.json();
-
             const wonAuctions = auctions.filter(auction => auction.winner === userId);
-
-            // Aggiorna il nome dell'utente selezionato
             selectedUserName.textContent = `Aste vinte da: ${user.name} ${user.surname}`;
 
             function truncateText(text, maxLength = 25) {
@@ -61,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return text;
             }
 
-            // Mostra le aste vinte nella sezione di destra
             userWonAuctionsContainer.innerHTML = wonAuctions.length
                 ? wonAuctions
                       .map(
@@ -76,19 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
                       .join("")
                 : "<p>Nessuna asta vinta</p>";
 
-            // Assicura che la sezione di destra sia visibile
             document.getElementById("user-auctions").classList.remove("hidden");
         } catch (error) {
             console.error("Errore durante il caricamento delle aste:", error);
         }
     }
-
-    // Cerca un utente
     searchBar.addEventListener("input", e => {
         const query = e.target.value.trim();
         loadUsersAndAuctions(query);
     });
-
-    // Carica la lista utenti inizialmente
     loadUsersAndAuctions();
 });

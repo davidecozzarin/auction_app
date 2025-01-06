@@ -5,16 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoryButtons = document.querySelectorAll(".category-icon");
     const filterButtons = document.querySelectorAll(".filter-button");
 
-    // Template specifico per la dashboard
     const renderDashboardAuctionTemplate = auction => {
         const endDate = new Date(auction.endDate);
         const now = new Date();
         const isExpired = auction.isExpired || endDate <= now;
 
-        let timeRemaining = isExpired
-            ? '<span class="expired-message">Asta Terminata</span>'
-            : `<span class="time-remaining">Tempo Rimanente: ${Math.floor((endDate - now) / (1000 * 60 * 60))} ore</span>`;
-
+        let timeRemaining = '';
+                    if (!isExpired) {
+                        const totalMinutes = Math.max(0, Math.ceil((endDate - now) / 1000 / 60));
+                        const hours = Math.floor(totalMinutes / 60);
+                        const minutes = totalMinutes % 60;
+                        timeRemaining = `<span class="time-remaining">Rimangono ${hours} ore e ${minutes} minuti</span>`;
+                    } else {
+                        timeRemaining = '<span class="expired-message">Asta Terminata</span>';
+                    }
+                    
         return `
             <div class="auction" data-auction-id="${auction._id}">
                 <h3>${auction.title}</h3>
@@ -26,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const auctionLoader = new AuctionLoader(renderDashboardAuctionTemplate);
-
     const attachViewDetailsEventListeners = () => {
         document.querySelectorAll(".view-details").forEach(button => {
             button.addEventListener("click", () => {
@@ -36,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // Event listener per i pulsanti delle categorie
     categoryButtons.forEach(button => {
         button.addEventListener("click", () => {
             updateActiveButton(categoryButtons, button);
@@ -47,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Event listener per i pulsanti dei filtri
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
             updateActiveButton(filterButtons, button);
@@ -57,14 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
             auctionLoader.load(category === "Tutte" ? "" : category, filter, auctionsList).then(attachViewDetailsEventListeners);
         });
     });
-
-    // Imposta lo stato predefinito
     const defaultCategoryButton = document.querySelector(".category-icon:first-child");
     const defaultFilterButton = document.querySelector('.filter-button[data-filter="all"]');
     if (defaultCategoryButton) defaultCategoryButton.click();
     if (defaultFilterButton) defaultFilterButton.click();
-
-    // Logout
     const logoutButton = document.getElementById("logout-button");
     if (logoutButton) {
         logoutButton.addEventListener("click", () => {
@@ -74,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Navigazione verso l'area utente
     const userAreaButton = document.getElementById("user-area-button");
     if (userAreaButton) {
         userAreaButton.addEventListener("click", () => {
@@ -89,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Aggiungi saluto per l'utente
     const userGreeting = document.getElementById("user-greeting");
     if (userGreeting) {
         fetch("/api/whoami", {
@@ -110,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // Gestione del popup per l'aggiunta di nuove aste
     const popupModal = document.getElementById("popup-modal");
     const addAuctionButton = document.getElementById("add-auction-button");
     const closeButton = document.querySelector(".close-button");
@@ -146,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("La data e l'ora di fine non possono essere nel passato!");
                 return;
             }
-
             try {
                 const response = await fetch("/api/auctions", {
                     method: "POST",

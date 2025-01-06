@@ -13,11 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const endDate = new Date(auction.endDate);
         const now = new Date();
         const isExpired = auction.isExpired || endDate <= now;
-
-        let timeRemaining = isExpired
-            ? '<span class="expired-message">Asta Terminata</span>'
-            : `<span class="time-remaining">Tempo Rimanente: ${Math.floor((endDate - now) / (1000 * 60 * 60))} ore</span>`;
-
+        let timeRemaining = '';
+                    if (!isExpired) {
+                        const totalMinutes = Math.max(0, Math.ceil((endDate - now) / 1000 / 60));
+                        const hours = Math.floor(totalMinutes / 60);
+                        const minutes = totalMinutes % 60;
+                        timeRemaining = `<span class="time-remaining">Rimangono ${hours} ore e ${minutes} minuti</span>`;
+                    } else {
+                        timeRemaining = '<span class="expired-message">Asta Terminata</span>';
+                    }
+           
         return `
             <div class="auction" data-auction-id="${auction._id}">
                 <h3>${auction.title}</h3>

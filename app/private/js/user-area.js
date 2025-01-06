@@ -2,23 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
     setupProfilePopup();
     loadUserAuctions();
 
-    // Torna alla dashboard
     document.getElementById("back-to-dashboard").addEventListener("click", () => {
         window.location.href = "dashboard.html";
     });
 });
 
-// Configura il popup per la modifica del profilo
 function setupProfilePopup() {
     const profileModal = document.getElementById("profile-modal");
     const editProfileButton = document.getElementById("edit-profile-button");
     const closeButton = document.querySelector(".close-button");
     const profileForm = document.getElementById("popup-edit-profile-form");
 
-    // Apri il popup e carica i dati del profilo
     editProfileButton.addEventListener("click", async () => {
         profileModal.classList.remove("hidden");
-
         try {
             const response = await fetch("/api/whoami");
             if (response.ok) {
@@ -32,25 +28,20 @@ function setupProfilePopup() {
             console.error("Errore durante il caricamento del profilo:", error);
         }
     });
-
-    // Chiudi il popup
     closeButton.addEventListener("click", () => {
         profileModal.classList.add("hidden");
     });
 
-    // Chiudi il popup cliccando fuori dal contenuto
     profileModal.addEventListener("click", (e) => {
         if (e.target === profileModal) {
             profileModal.classList.add("hidden");
         }
     });
 
-    // Gestisci il salvataggio del profilo
     profileForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const name = document.getElementById("popup-user-name").value.trim();
         const surname = document.getElementById("popup-user-surname").value.trim();
-
         try {
             const response = await fetch("/api/users", {
                 method: "PUT",
@@ -74,7 +65,6 @@ function setupProfilePopup() {
     });
 }
 
-// Carica le aste personali dell'utente
 async function loadUserAuctions() {
     try {
         const userResponse = await fetch("/api/whoami");
@@ -82,10 +72,8 @@ async function loadUserAuctions() {
             alert("Errore nel recupero dell'utente.");
             return;
         }
-
         const user = await userResponse.json();
         const userId = user.id;
-
         const response = await fetch("/api/auctions");
         if (response.ok) {
             const auctions = await response.json();
@@ -98,17 +86,16 @@ async function loadUserAuctions() {
                     const now = new Date();
                     const isExpired = auction.isExpired || endDate <= now;
     
-                    // Calcola il tempo rimanente in ore e minuti o mostra che è terminata
                     let timeRemaining = '';
                     if (!isExpired) {
                         const totalMinutes = Math.max(0, Math.ceil((endDate - now) / 1000 / 60));
                         const hours = Math.floor(totalMinutes / 60);
                         const minutes = totalMinutes % 60;
-                        timeRemaining = `<span class="time-remaining">Tempo Rimanente: ${hours} ore e ${minutes} minuti</span>`;
+                        timeRemaining = `<span class="time-remaining">Rimangono ${hours} ore e ${minutes} minuti</span>`;
                     } else {
                         timeRemaining = '<span class="expired-message">Asta Terminata</span>';
                     }
-    
+
                     return `
                         <div class="auction" data-auction-id="${auction._id}">
                             <h3>${auction.title}</h3>
