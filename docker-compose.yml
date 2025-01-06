@@ -8,8 +8,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./app:/usr/src/app            # Monta tutto il codice sorgente
-      - /usr/src/app/node_modules     # Escludi node_modules dal montaggio
+      - ./app:/usr/src/app            
+      - /usr/src/app/node_modules     
     links:
       - "cozzarin_mongo:mongosrv"
     depends_on:
