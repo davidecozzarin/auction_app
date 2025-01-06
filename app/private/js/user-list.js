@@ -1,3 +1,7 @@
+function truncateTitle(text, maxLength = 18) {
+    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const userListContainer = document.getElementById("user-list-container");
     const userWonAuctionsContainer = document.getElementById("user-won-auctions");
@@ -58,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
                       .map(
                           auction => `
                         <div class="auction">
-                            <h4>${auction.title}</h4>
+                            <h4>${truncateTitle(auction.title)}</h4>
                             <p>${truncateText(auction.description)}</p>
                             <p><strong>Prezzo finale:</strong> €${auction.currentBid}</p>
                         </div>

@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+function truncateTitle(text, maxLength = 18) {
+    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+}
+
 function setupProfilePopup() {
     const profileModal = document.getElementById("profile-modal");
     const editProfileButton = document.getElementById("edit-profile-button");
@@ -85,20 +89,28 @@ async function loadUserAuctions() {
                     const endDate = new Date(auction.endDate);
                     const now = new Date();
                     const isExpired = auction.isExpired || endDate <= now;
-    
                     let timeRemaining = '';
                     if (!isExpired) {
                         const totalMinutes = Math.max(0, Math.ceil((endDate - now) / 1000 / 60));
                         const hours = Math.floor(totalMinutes / 60);
                         const minutes = totalMinutes % 60;
-                        timeRemaining = `<span class="time-remaining">Rimangono ${hours} ore e ${minutes} minuti</span>`;
+                        const days = Math.floor(hours / 24);
+                        const remainingHours = hours % 24;
+                    
+                        if (hours >= 24) {
+                            timeRemaining = `<span class="time-remaining">Rimangono ${days} ${days === 1 ? 'giorno' : 'giorni'} e ${remainingHours} ${remainingHours === 1 ? 'ora' : 'ore'}</span>`;
+                        } else if (hours > 0) {
+                            timeRemaining = `<span class="time-remaining">Rimangono ${hours} ${hours === 1 ? 'ora' : 'ore'} e ${minutes} ${minutes === 1 ? 'minuto' : 'minuti'}</span>`;
+                        } else {
+                            timeRemaining = `<span class="time-remaining">Rimangono ${minutes} ${minutes === 1 ? 'minuto' : 'minuti'}</span>`;
+                        }
                     } else {
                         timeRemaining = '<span class="expired-message">Asta Terminata</span>';
                     }
-
+                                                            
                     return `
                         <div class="auction" data-auction-id="${auction._id}">
-                            <h3>${auction.title}</h3>
+                            <h3>${truncateTitle(auction.title)}</h3>
                             <p><strong>Prezzo corrente:</strong> €${auction.currentBid}</p>
                             <p>${timeRemaining}</p>
                             <button class="view-details" onclick="window.location.href='edit-auction.html?id=${auction._id}'">Modifica</button>
