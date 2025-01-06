@@ -35,12 +35,14 @@ body {
 }
 
 .header-container {
-    display: grid; /* Abilita il layout grid */
-    grid-template-columns: 5fr 2fr; /* Due colonne) */
-    align-items: center; /* Allinea verticalmente gli elementi */
+    display: flex; /* Abilita il layout flex */
+    justify-content: center; /* Spaziatura tra il contenuto dei due div */
+    align-items: stretch; /* Allinea verticalmente gli elementi */
     gap: 20px; /* Spaziatura tra le colonne */
+    width: 100%; /* Occupa tutta la larghezza disponibile */
     max-width: 1200px; /* Larghezza massima */
     margin: 0; /* Centra il contenitore */
+    padding: 0 20px; /* Spaziatura interna */
 }
 
 .header-left {
@@ -48,12 +50,14 @@ body {
     align-items: center;
     gap: 10px; /* Spaziatura tra logo e titolo */
     justify-content: flex-start; /* Allinea gli elementi a sinistra */
+    flex: 1; /* Occupa tutto lo spazio disponibile a sinistra */
 }
 
 .header-right {
     display: flex; /* Layout in linea per i pulsanti */
     justify-content: flex-end; /* Allinea gli elementi a sinistra */
     gap: 10px; /* Spaziatura tra i pulsanti */
+    flex: 0;
 }
 
 .app-logo {
@@ -183,8 +187,6 @@ body {
     font-weight: bold;
 }
 
-
-
 /* Pulsanti */
 /* Stile per i pulsanti */
 button {
@@ -242,8 +244,6 @@ button:disabled {
     background: linear-gradient(to right, #b0d8ff, #91c7ff); /* Sfumatura ancora più scura */
     transform: translateY(0); /* Rimuovi sollevamento */
 }
-
-
 
 /*modale*/
 /* Stile base per il popup */
@@ -636,7 +636,6 @@ form#bid-form {
 }
 
 /* User list */
-
 .user-page .dashboard-main {
     display: grid;
     grid-template-columns: 1fr 2fr; /* Prima colonna 1fr, seconda colonna 2fr */
