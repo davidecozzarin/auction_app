@@ -1,5 +1,4 @@
-const { MongoClient, ObjectId } = require("mongodb"); // Importa ObjectId
-
+const { MongoClient, ObjectId } = require("mongodb");
 const MONGODB_URI = "mongodb://cozzarin_mongo:27017";
 const DB_NAME = "auctiondb";
 let cachedDb;
@@ -22,5 +21,5 @@ module.exports = {
             throw error;
         }
     },
-    ObjectId, // Esporta ObjectId per usarlo nei tuoi router
+    ObjectId,
 };

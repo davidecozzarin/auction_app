@@ -8,69 +8,52 @@ const { ObjectId } = require("./db.js");
 router.get("/users", async (req, res) => {
   try {
     const query = req.query.q || "";
-    
-    // Connessione al database
     const mongo = await db.connectToDatabase();
     const usersCollection = mongo.collection("users");
-
-    // Ricerca degli utenti con `username` che corrisponde alla query
     const users = await usersCollection.find({ username: { $regex: query, $options: "i" } }).toArray();
     res.json(users);
   } catch (error) {
-    console.error("Error fetching users:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore durante il recupero degli utenti:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
+// GET api/users/:id
 router.get("/users/:id", async (req, res) => {
   try {
-    // Connessione al database
     const mongo = await db.connectToDatabase();
     const usersCollection = mongo.collection("users");
-
-    // Cerca l'utente per ID
     const user = await usersCollection.findOne({ _id: new ObjectId(req.params.id) });
-    if (!user) return res.status(404).json({ msg: "User not found" });
-
+    if (!user) return res.status(404).json({ msg: "Utente non trovato" });
     res.json(user);
   } catch (error) {
-    console.error("Error fetching user by ID:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore nel recupero del'utente con ID:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
-// PUT /api/users  Aggiorna le informazioni del profilo utente autenticato (questa funzionalità l'ho aggiunta io)
+// PUT /api/users  (Modifica nome e cognome utente)
 router.put("/users", verifyToken, async (req, res) => {
   try {
-    console.log("User ID from token:", req.userId); // Logga l'ID utente
     const { name, surname } = req.body;
-
-    // Connessione al database
     const mongo = await db.connectToDatabase();
     const usersCollection = mongo.collection("users");
-    
-    console.log("[PUT /users] Query: ", {
-      filter: { _id: req.userId },
-      update: { $set: { name, surname } },
-    });
-
-    // Aggiorna il profilo dell'utente autenticato
+  
     const result = await usersCollection.updateOne(
-      { _id: new ObjectId(req.userId) }, // Filtra per l'ID dell'utente autenticato
-      { $set: { name, surname } },  // Aggiorna i campi
+      { _id: new ObjectId(req.userId) }, 
+      { $set: { name, surname } },  
     );
-
-    res.status(200).json({msg: "User Profile updated succesfully"})
+    res.status(200).json({msg: "Profilo Utente modificato correttamente"})
   } catch (error) {
-    console.error("Error updating profile:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore durante la modifica del profilo:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
+// GET /api/auctions
 router.get("/auctions", async (req, res) => {
   try {
     const { category = "" } = req.query;
-
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
     const usersCollection = mongo.collection("users");
@@ -79,12 +62,8 @@ router.get("/auctions", async (req, res) => {
     if (category) {
       filter.category = category;
     }
-
     const auctions = await auctionsCollection.find(filter).toArray();
-
     const now = new Date();
-
-    // Enrich auctions with expiration status and winner name
     const enrichedAuctions = await Promise.all(
       auctions.map(async (auction) => {
         const isExpired = new Date(auction.endDate) <= now;
@@ -92,18 +71,13 @@ router.get("/auctions", async (req, res) => {
         let winnerName = null;
 
         if (isExpired && auction.bids?.length > 0) {
-          // Find the highest bid
           const highestBid = auction.bids.reduce((highest, bid) =>
             bid.amount > highest.amount ? bid : highest, auction.bids[0]
           );
           winner = highestBid.user;
-
-          // Find the username of the winner
           const user = await usersCollection.findOne({ _id: new db.ObjectId(winner) });
           winnerName = user ? user.username : "Sconosciuto";
         }
-
-         // Attach bids with user details
          const detailedBids = await Promise.all(
           (auction.bids || []).map(async (bid) => {
             const user = await usersCollection.findOne({ _id: new db.ObjectId(bid.user) });
@@ -113,7 +87,6 @@ router.get("/auctions", async (req, res) => {
             };
           })
         );
-
         return {
           ...auction,
           isExpired,
@@ -123,30 +96,23 @@ router.get("/auctions", async (req, res) => {
         };
       })
     );
-
     res.json(enrichedAuctions);
   } catch (error) {
-    console.error("Error fetching auctions:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore durante il caricamento delle aste:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
-// POST /auctions: Crea una nuova asta
+// POST /auctions
 router.post("/auctions", verifyToken, async (req, res) => {
   try {
     const { title, description, startPrice, endDate, category } = req.body;
-
-    // Controlla che la data di fine sia valida
     const endDateTime = new Date(endDate);
     if (endDateTime <= new Date()) {
-      return res.status(400).json({ msg: "End date must be in the future" });
+      return res.status(400).json({ msg: "La data di fine dev'essere futura!" });
     }
-
-    // Connessione alla collezione aste
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
-
-    // Crea la nuova asta
     const newAuction = {
       title,
       description,
@@ -156,28 +122,25 @@ router.post("/auctions", verifyToken, async (req, res) => {
       category,
       createdBy: req.userId,
     };
-
     await auctionsCollection.insertOne(newAuction);
-
-    res.status(201).json({ msg: "Auction created successfully", auction: newAuction });
+    res.status(201).json({ msg: "Asta creata correttamente", auction: newAuction });
   } catch (error) {
-    console.error("Error creating auction:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore nella creazione dell'asta:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
+// GET /api/auctions/:id
 router.get("/auctions/:id", async (req, res) => {
   try {
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
-
     const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
-    if (!auction) return res.status(404).json({ msg: "Auction not found" });
-
+    if (!auction) return res.status(404).json({ msg: "Asta non trovata" });
     res.json(auction);
   } catch (error) {
-    console.error("Error fetching auction:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore nel caricamento dell'asta:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
@@ -185,35 +148,27 @@ router.get("/auctions/:id", async (req, res) => {
 router.put("/auctions/:id", verifyToken, async (req, res) => {
   try {
     const { title, description } = req.body;
-    const auctionId = req.params.id;
-
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
-
     const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
     if (!auction) {
-      return res.status(404).json({ msg: "Auction not found" });
+      return res.status(404).json({ msg: "Asta non trovata" });
     }
-
-    // Controlla se l'asta è scaduta
     const currentTime = new Date();
     if (new Date(auction.endDate) <= currentTime) {
-      return res.status(403).json({ msg: "Cannot modify expired auction" });
+      return res.status(403).json({ msg: "Non è posssibile modificare le aste terminate!" });
     }
-
     const result = await auctionsCollection.updateOne(
       { _id: new ObjectId(req.params.id), createdBy: new ObjectId(req.userId) },
       { $set: { title, description } }
     );
-    
     if (result.matchedCount === 0) {
-        return res.status(403).json({ msg: "Not authorized to modify this auction or auction not found" });
+        return res.status(403).json({ msg: "Modifica non consentita!" });
     }
-    res.status(200).json({ msg: "Auction updated successfully" });
-
+    res.status(200).json({ msg: "Asta modificata correttamente" });
   } catch (error) {
-    console.error("Error updating auction:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore durante la modifica dell'asta:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
@@ -222,20 +177,17 @@ router.delete("/auctions/:id", verifyToken, async (req, res) => {
   try {
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
-
     const result = await auctionsCollection.deleteOne({
       _id: new ObjectId(req.params.id),
       createdBy: req.userId,
     });
-
     if (result.deletedCount === 0) {
-      return res.status(403).json({ msg: "Not authorized to delete this auction or auction not found" });
+      return res.status(403).json({ msg: "Modifica non consentita!" });
     }
-
-    res.json({ msg: "Auction deleted" });
+    res.json({ msg: "Asta Eliminata" });
   } catch (error) {
-    console.error("Error deleting auction:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore durante l'eliminazione:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
@@ -244,55 +196,44 @@ router.get("/auctions/:id/bids", async (req, res) => {
   try {
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
-
     const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
-    if (!auction) return res.status(404).json({ msg: "Auction not found" });
-
+    if (!auction) return res.status(404).json({ msg: "Asta non trovata" });
     res.json(auction.bids || []);
   } catch (error) {
-    console.error("Error fetching bids:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore durante il recupero delle offerte:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
+// POST /api/auctions/:id/bids
 router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
   try {
     const { amount } = req.body;
-
     const mongo = await db.connectToDatabase();
     const auctionsCollection = mongo.collection("auctions");
     const usersCollection = mongo.collection("users");
-
     const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
     if (!auction) {
-      return res.status(404).json({ msg: "Auction not found" });
+      return res.status(404).json({ msg: "Asta non trovata" });
     }
-
     if (new Date() > auction.endDate) {
-      return res.status(400).json({ msg: "Auction is closed" });
+      return res.status(400).json({ msg: "L'asta è terminata" });
     }
-
     const bidAmount = parseFloat(amount); 
     const currentBid = parseFloat(auction.currentBid); 
-
     if (isNaN(bidAmount) || bidAmount <= currentBid) {
-      return res.status(400).json({ msg: "Bid must be higher than the current bid" });
+      return res.status(400).json({ msg: "La tua offerta dev'essere più alta di quella corrente!" });
     }
-
-    // Recupera i dati dell'utente autenticato
     const user = await usersCollection.findOne({ _id: new ObjectId(req.userId) });
     if (!user) {
-      return res.status(404).json({ msg: "User not found" });
+      return res.status(404).json({ msg: "Utente non trovato" });
     }
-
-    // Aggiungi l'offerta con i dettagli utente
     const newBid = {
-      user: req.userId, // Salva l'ID dell'utente
-      userName: user.username, // Salva il nome dell'utente
+      user: req.userId, 
+      userName: user.username, 
       amount,
       date: new Date(),
     };
-
     const updatedAuction = await auctionsCollection.findOneAndUpdate(
       { _id: new ObjectId(req.params.id) },
       {
@@ -301,32 +242,26 @@ router.post("/auctions/:id/bids", verifyToken, async (req, res) => {
       },
       { returnDocument: "after" }
     );
-
-    res.json({ msg: "Bid placed successfully", auction: updatedAuction.value });
+    res.json({ msg: "Offerta effettuata correttamente", auction: updatedAuction.value });
   } catch (error) {
-    console.error("Error placing bid:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore durante l'inserimento dell'offerta:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
 // GET /api/whoami
 router.get("/whoami", verifyToken, async (req, res) => {
   try {
-    // Connessione al database
     const mongo = await db.connectToDatabase();
     const usersCollection = mongo.collection("users");
-
-    // Trova l'utente in base all'ID decodificato dal token
     const user = await usersCollection.findOne({ _id: new ObjectId(req.userId) });
     if (!user) {
-      return res.status(404).json({ msg: "User not found" });
+      return res.status(404).json({ msg: "Utente non trovato" });
     }
-
-    // Rispondi con i dati dell'utente
     res.json({ id: user._id, username: user.username, name: user.name, surname: user.surname });
   } catch (error) {
-    console.error("Error fetching user data:", error);
-    res.status(500).json({ msg: "Internal Server Error" });
+    console.error("Errore nel caricamento dati utente:", error);
+    res.status(500).json({ msg: "Errore Server Interno" });
   }
 });
 
