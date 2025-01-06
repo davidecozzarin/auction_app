@@ -54,6 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
             // Aggiorna il nome dell'utente selezionato
             selectedUserName.textContent = `Aste vinte da: ${user.name} ${user.surname}`;
 
+            function truncateText(text, maxLength = 25) {
+                if (text.length > maxLength) {
+                    return text.substring(0, maxLength) + "...";
+                }
+                return text;
+            }
+
             // Mostra le aste vinte nella sezione di destra
             userWonAuctionsContainer.innerHTML = wonAuctions.length
                 ? wonAuctions
@@ -61,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
                           auction => `
                         <div class="auction">
                             <h4>${auction.title}</h4>
-                            <p>${auction.description}</p>
+                            <p>${truncateText(auction.description)}</p>
                             <p><strong>Prezzo finale:</strong> €${auction.currentBid}</p>
                         </div>
                     `

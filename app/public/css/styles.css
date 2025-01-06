@@ -90,6 +90,16 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Sezione principale con dimensione fissa */
+.fixed-size {
+    max-width: 90%; /* Assicura che non superi i limiti */
+    width: 90%; /* Occupa tutto lo spazio disponibile */
+    overflow: hidden; /* Nasconde contenuti che escono */
+    word-wrap: break-word; /* Manda a capo le parole lunghe */
+    overflow-wrap: break-word; /* Compatibilità per browser moderni */
+    white-space: normal; /* Per il testo */
+}
+
 .dashboard-section h2 {
     color: #005A9E;
     margin-bottom: 10px;
@@ -474,7 +484,6 @@ button:disabled {
     font-weight: bold;
 }
 
-
 /* regole specifiche per user-area.html */
 /* Specifico per l'Area Utente */
 #user-auctions-list {
@@ -575,7 +584,6 @@ form .delete-button:hover {
     background-color: #b52a1f;
 }
 
-
 /* auction details */
 /* Layout a griglia per i dettagli e lo storico */
 .grid-container {
@@ -586,6 +594,7 @@ form .delete-button:hover {
     margin-top: 20px;
 }
 
+.auction-bids,
 .auction-info {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -593,20 +602,16 @@ form .delete-button:hover {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 100%;
+    overflow: hidden;
+    flex-direction: column; /* Disposizione verticale del contenuto */
 }
 
-.auction-bids {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
-}
-
-.auction-details p,
+.auction-details,
 .bids-list p {
     margin: 10px 0;
+    word-wrap: break-word; /* Permette di andare a capo se il testo è troppo lungo */
+    overflow-wrap: break-word; /* Compatibilità con browser moderni */
+    white-space: normal; /* Assicura che il testo vada a capo */
 }
 
 .bids-list ul {
@@ -745,58 +750,4 @@ form#bid-form {
 
 #user-won-auctions .auction strong {
     font-weight: bold; /* Evidenzia il testo importante */
-}
-
-/* login */
-/* Contenitore principale per login e signup */
-.login-container {
-    background: white; /* Sfondo bianco */
-    border-radius: 8px; /* Angoli arrotondati */
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra */
-    text-align: center;
-    
-}
-
-/* Titolo delle pagine */
-.login-title {
-    font-size: 2rem;
-    color: #0056b3; /* Colore primario */
-    margin-bottom: 20px;
-}
-
-/* Stile per i campi di input */
-.login-form input {
-    width: 100%;
-    margin: 10px 0; /* Spaziatura tra i campi */
-    border: 1px solid #ddd; /* Bordo sottile */
-    border-radius: 5px; /* Angoli arrotondati */
-    font-size: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
-}
-
-.login-form input:focus {
-    border-color: #0078D7; /* Colore al focus */
-    outline: none;
-}
-
-/* Stile per il banner dei messaggi */
-#message-banner {
-    display: none;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-/* Messaggi di successo */
-#message-banner.success {
-    background-color: #d4edda; /* Verde chiaro */
-    color: #155724;
-}
-
-/* Messaggi di errore */
-#message-banner.error {
-    background-color: #f8d7da; /* Rosso chiaro */
-    color: #721c24;
 }

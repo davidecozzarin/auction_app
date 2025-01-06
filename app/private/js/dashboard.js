@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert("Asta aggiunta con successo!");
                     popupModal.classList.add("hidden");
                     popupForm.reset();
-                    auctionLoader.load("", "all", auctionsList); // Ricarica le aste
+                    auctionLoader.load("", "all", auctionsList).then(attachViewDetailsEventListeners);
                 } else {
                     alert("Errore durante l'aggiunta dell'asta.");
                 }

@@ -54,7 +54,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 alert("Asta aggiornata con successo!");
                 window.location.href = "user-area.html";
             } else {
-                alert("Errore durante l'aggiornamento dell'asta.");
+                const errorData = await response.json(); // Leggi i dettagli dell'errore dal backend
+                alert(`Errore: ${errorData.msg}`);
             }
         } catch (error) {
             console.error("Errore durante l'aggiornamento:", error);

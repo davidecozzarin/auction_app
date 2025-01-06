@@ -191,10 +191,15 @@ router.put("/auctions/:id", verifyToken, async (req, res) => {
     const auctionsCollection = mongo.collection("auctions");
 
     const auction = await auctionsCollection.findOne({ _id: new ObjectId(req.params.id) });
-    console.log("Auction data:", auction);
-    console.log("CreatedBy type:", typeof auction.createdBy, "value:", auction.createdBy);
+    if (!auction) {
+      return res.status(404).json({ msg: "Auction not found" });
+    }
 
-    console.log("Tentativo di aggiornamento asta:", { auctionId, userId: req.userId });
+    // Controlla se l'asta è scaduta
+    const currentTime = new Date();
+    if (new Date(auction.endDate) <= currentTime) {
+      return res.status(403).json({ msg: "Cannot modify expired auction" });
+    }
 
     const result = await auctionsCollection.updateOne(
       { _id: new ObjectId(req.params.id), createdBy: new ObjectId(req.userId) },

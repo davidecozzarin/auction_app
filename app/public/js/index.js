@@ -10,10 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Definiamo il template specifico per la homepage
     const renderHomeAuctionTemplate = auction => {
+        const endDate = new Date(auction.endDate);
+        const now = new Date();
+        const isExpired = auction.isExpired || endDate <= now;
+
+        let timeRemaining = isExpired
+            ? '<span class="expired-message">Asta Terminata</span>'
+            : `<span class="time-remaining">Tempo Rimanente: ${Math.floor((endDate - now) / (1000 * 60 * 60))} ore</span>`;
+
         return `
             <div class="auction" data-auction-id="${auction._id}">
                 <h3>${auction.title}</h3>
-                <p>${auction.description}</p>
+                <p>${timeRemaining}</p>
                 <p><strong>Prezzo corrente:</strong> €${auction.currentBid}</p>
             </div>
         `;
