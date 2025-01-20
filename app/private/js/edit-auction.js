@@ -43,6 +43,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                     description: auctionDescription.value.trim(),
                 }),
             });
+            if (response.status === 401) {
+                alert("La sessione è scaduta. Effettua nuovamente il login.");
+                window.location.href = "/index.html"; 
+                throw new Error("Token scaduto o non valido.");
+            }
             if (response.ok) {
                 alert("Asta aggiornata con successo!");
                 window.location.href = "user-area.html";
@@ -61,6 +66,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const response = await fetch(`/api/auctions/${auctionId}`, {
                     method: "DELETE",
                 });
+                if (response.status === 401) {
+                    alert("La sessione è scaduta. Effettua nuovamente il login.");
+                    window.location.href = "/index.html"; 
+                    throw new Error("Token scaduto o non valido.");
+                }
                 if (response.ok) {
                     alert("Asta eliminata con successo!");
                     window.location.href = "user-area.html";

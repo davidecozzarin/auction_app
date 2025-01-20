@@ -48,7 +48,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                         },
                         body: JSON.stringify({ amount }),
                     });
-
+                    if (bidResponse.status === 401) {
+                        alert("La sessione è scaduta. Effettua nuovamente il login.");
+                        window.location.href = "/index.html"; 
+                        throw new Error("Token scaduto o non valido.");
+                    }
                     if (bidResponse.ok) {
                         alert("Offerta effettuata con successo!");
                         location.reload();

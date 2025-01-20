@@ -34,7 +34,8 @@ async function populateDatabase() {
 
     const userIds = Object.values(insertedUsers.insertedIds);
     auctions.forEach((auction, index) => {
-      auction.createdBy = userIds[index % userIds.length]; 
+      auction.createdBy = userIds[index % userIds.length];
+      auction.currentBid = auction.startPrice;  
     });
 
     const auctionsCollection = db.collection("auctions");
